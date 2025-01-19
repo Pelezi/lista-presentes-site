@@ -9,12 +9,14 @@ interface InfoboxProps {
 
 const InfoBox: React.FC<InfoboxProps> = ({ gift }) => {
     const [isUnavailable, setIsUnavailable] = useState(false);
+    const [availableQuantity, setAvailableQuantity] = useState(0);
 
     useEffect(() => {
         const fetchGiftData = async () => {
             const updatedGift = await getGiftsById(gift.id);
             const totalCount = updatedGift.guests?.reduce((sum, guest) => sum + guest.count, 0) || 0;
             setIsUnavailable(totalCount >= updatedGift.quantity);
+            setAvailableQuantity(updatedGift.quantity - totalCount);
         };
 
         fetchGiftData();
@@ -26,8 +28,7 @@ const InfoBox: React.FC<InfoboxProps> = ({ gift }) => {
                 <img src={gift.photoUrl} className={styles.cardImage} alt={gift.name} />
                 <h2 className={styles.cardTitle}>{gift.name}</h2>
                 <p className={styles.cardDescription}>{gift.description}</p>
-                {gift.quantity === 1 ? <></> : 
-                <p className={styles.cardQuantity}>Restam: 2/{gift.quantity}</p> }
+                <p className={styles.cardQuantity}>Quantidade Disponível: {availableQuantity}/{gift.quantity}</p>
             </div>
             <NavLink to={`/gift/${gift.id}`} className={styles.cardBtn}>Escolher presente</NavLink>
         </div>
