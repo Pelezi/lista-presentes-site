@@ -3,13 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Pessoa, deletePessoa, getPessoaById, removePessoaFromCelula, removePessoaFromGrupo } from "../../../services/pessoaService";
-import { deletePhone } from "../../../services/phoneService";
-import { deleteEmail } from "../../../services/emailService";
-import { Celula, getCelulasById } from "../../../services/celulaService";
-import { Grupo, getGruposByIntegranteId } from "../../../services/grupoService";
-import { Lider, getLiderByPessoaId } from "../../../services/liderService";
-import { Discipulador, getDiscipuladorByPessoaId } from "../../../services/discipuladorService";
-import { Diretor, getDiretorByPessoaId } from "../../../services/diretorService";
+import { Gift, getGiftsById } from "../../../services/giftService";
+
 import Button from "../../../components/common/Button";
 
 import { useParams } from "react-router-dom";
@@ -25,39 +20,21 @@ const DetalhesPessoa: React.FC = () => {
     const navigate = useNavigate();
 
     const [pessoa, setPessoa] = useState<Pessoa>({} as Pessoa);
-    const [celula, setCelula] = useState<Celula>({} as Celula);
-    const [grupos, setGrupos] = useState<Grupo[]>([] as Grupo[]);
-    const [lider, setLider] = useState<Lider>({} as Lider);
-    const [discipulador, setDiscipulador] = useState<Discipulador>({} as Discipulador);
-    const [diretor, setDiretor] = useState<Diretor>({} as Diretor);
+    const [gift, setGift] = useState<Gift>({} as Gift);
 
     const fetchPessoa = async () => {
         try {
             const pessoa = await getPessoaById(String(id));
             setPessoa(pessoa);
-            try { const celula = await getCelulasById(String(pessoa.celulaId?.id)); setCelula(celula); } catch (error) { console.log('Erro ao buscar celula', error); }
-            try { const lider = await getLiderByPessoaId(String(pessoa.id)); setLider(lider); } catch (error) { console.log('Erro ao buscar lider', error); }
-            try { const discipulador = await getDiscipuladorByPessoaId(String(pessoa.id)); setDiscipulador(discipulador); } catch (error) { console.log('Erro ao buscar discipulador', error); }
-            try { const diretor = await getDiretorByPessoaId(String(pessoa.id)); setDiretor(diretor); } catch (error) { console.log('Erro ao buscar diretor', error); }
+            try { const gift = await getGiftsById(String(pessoa.celulaId?.id)); setGift(gift); } catch (error) { console.log('Erro ao buscar gift', error); }
         } catch (error) {
             console.log('Erro ao buscar pessoas', error);
 
         }
     };
 
-    const fetchGrupos = async () => {
-        try {
-            const grupos = await getGruposByIntegranteId(String(id));
-            setGrupos(grupos);
-        } catch (error) {
-            console.log('Erro ao buscar grupos', error);
-
-        }
-    }
-
     useEffect(() => {
         fetchPessoa();
-        fetchGrupos();
     }, []);
 
     const handleEditPessoa = (pessoa: Pessoa) => {
@@ -75,28 +52,6 @@ const DetalhesPessoa: React.FC = () => {
 
         }
     };
-    const handleDeletePhone = async (phone: string | undefined) => {
-        try {
-            await deletePhone(phone);
-            fetchPessoa();
-            alert("Telefone removido com sucesso!");
-        } catch (error) {
-            console.log("Erro ao remover telefone", error);
-            alert("Erro ao remover telefone. Tente novamente.");
-
-        }
-    }
-    const handleDeleteEmail = async (email: string | undefined) => {
-        try {
-            await deleteEmail(email);
-            fetchPessoa();
-            alert("Email removido com sucesso!");
-        } catch (error) {
-            console.log("Erro ao remover email", error);
-            alert("Erro ao remover email. Tente novamente.");
-
-        }
-    }
 
     const handleAddPhone = () => {
         navigate(`/pessoas/phones/cadastrar/${id}`);
@@ -106,27 +61,15 @@ const DetalhesPessoa: React.FC = () => {
         navigate(`/pessoas/emails/cadastrar/${id}`);
     };
 
-    const handleLiderProfile = () => {
-        navigate(`/lider/${lider.id}`);
-    }
-
-    const handleDiscipuladorProfile = () => {
-        navigate(`/discipulador/${discipulador.id}`);
-    }
-
-    const handleDiretorProfile = () => {
-        navigate(`/diretor/${diretor.id}`);
-    }
-
-    const handleCelulaProfile = () => {
-        navigate(`/celula/${celula.id}`);
+    const handleGiftProfile = () => {
+        navigate(`/gift/${gift.id}`);
     }
 
     const handleGrupoProfile = (grupoId: string) => {
         navigate(`/grupo/${grupoId}`);
     }
 
-    const handleRemoveFromCelula = async (id: string) => {
+    const handleRemoveFromGift = async (id: string) => {
         try {
             await removePessoaFromCelula(id);
             fetchPessoa();
@@ -138,20 +81,8 @@ const DetalhesPessoa: React.FC = () => {
         }
     }
 
-    const handleAddToCelula = () => {
-        navigate(`/pessoas/celula/${id}`);
-    }
-
-    const handleRemoveFromGrupo = async (id: string, grupoId: string) => {
-        try {
-            await removePessoaFromGrupo(id, grupoId);
-            fetchGrupos();
-            alert("Pessoa removida do grupo com sucesso!");
-        } catch (error) {
-            console.log("Erro ao remover pessoa do grupo", error);
-            alert("Erro ao remover pessoa do grupo. Tente novamente.");
-
-        }
+    const handleAddToGift = () => {
+        navigate(`/pessoas/gift/${id}`);
     }
 
     const handleAddToGrupo = () => {
@@ -169,9 +100,6 @@ const DetalhesPessoa: React.FC = () => {
                 <h1>{pessoa.nome}</h1>
                 <div className={styles.profiles}>
                     <Button selected>{capitalize(pessoa.cargo)}</Button>
-                    {lider.id ? <Button onClick={handleLiderProfile}>Líder</Button> : null}
-                    {discipulador.id ? <Button onClick={handleDiscipuladorProfile}>Discipulador</Button> : null}
-                    {diretor.id ? <Button onClick={handleDiretorProfile}>Diretor</Button> : null}
                 </div>
             </div>
             <div className={styles.buttons}>
@@ -204,7 +132,7 @@ const DetalhesPessoa: React.FC = () => {
                             <div className={styles.contentRow}>
                                 <p key={phone.id}>{phone.numero}</p>
                                 <p key={phone.id}>{phone.phoneType}</p>
-                                <Button deleteButton onClick={() => handleDeletePhone(phone.id)}><FaRegTrashCan /></Button>
+                                <Button deleteButton onClick={() => ({})}><FaRegTrashCan /></Button>
                             </div>
                         ))}
                     </div>
@@ -217,7 +145,7 @@ const DetalhesPessoa: React.FC = () => {
                             <div className={styles.contentRow}>
                                 <p key={email.id}>{email.email}</p>
                                 <p key={email.id}>{email.emailType}</p>
-                                <Button deleteButton onClick={() => handleDeleteEmail(email.id)}><FaRegTrashCan /></Button>
+                                <Button deleteButton onClick={() => ({})}><FaRegTrashCan /></Button>
                             </div>
                         ))}
                     </div>
@@ -228,17 +156,17 @@ const DetalhesPessoa: React.FC = () => {
                     <div className={styles.contentBlock}>
                         <div className={styles.contentTitle}>
                             <h3>Célula:</h3>
-                            {celula ?
+                            {gift ?
                                 <div className={styles.sectionButtons}>
-                                    <Button blue onClick={handleAddToCelula}><FaPencil /></Button>
-                                    <Button deleteButton onClick={() => handleRemoveFromCelula(String(pessoa.id))}><FaRegTrashCan /></Button>
+                                    <Button blue onClick={handleAddToGift}><FaPencil /></Button>
+                                    <Button deleteButton onClick={() => handleRemoveFromGift(String(pessoa.id))}><FaRegTrashCan /></Button>
                                 </div>
                                 :
-                                <Button green onClick={handleAddToCelula}><FaPlus /></Button>
+                                <Button green onClick={handleAddToGift}><FaPlus /></Button>
                             }
                         </div>
                         <div className={styles.contentSection}>
-                            {pessoa.celulaId ?
+                            {/* {pessoa.celulaId ?
                                 <div className={styles.contentBlock}>
                                     <h3>{celula.nome}</h3>
                                     <div className={styles.contentRow}>
@@ -253,13 +181,13 @@ const DetalhesPessoa: React.FC = () => {
                                     </div>
                                     <br />
                                     <div className={styles.contentRow}>
-                                        <Button blue onClick={handleCelulaProfile}>Ver Célula</Button>
+                                        <Button blue onClick={handleGiftProfile}>Ver Célula</Button>
                                     </div>
                                 </div>
 
                                 :
                                 null
-                            }
+                            } */}
                         </div>
                     </div>
                 </div>
@@ -272,7 +200,7 @@ const DetalhesPessoa: React.FC = () => {
                             <Button green onClick={handleAddToGrupo}><FaPlus /></Button>
                         </div>
                         <div className={styles.contentSection}>
-                            {grupos.map((grupo) => (
+                            {/* {grupos.map((grupo) => (
                                 <div className={styles.contentBlock}>
                                     <div className={styles.contentTitle}>
                                         <h3 key={grupo.id}>{grupo.nome}</h3>
@@ -289,7 +217,7 @@ const DetalhesPessoa: React.FC = () => {
                                         <Button blue onClick={() => handleGrupoProfile(grupo.id)}>Ver Grupo</Button>
                                     </div>
                                 </div>
-                            ))}
+                            ))} */}
                         </div>
                     </div>
                 </div>

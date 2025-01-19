@@ -24,18 +24,6 @@ import ManipularGrupo from "../pages/Grupos/ManipularGrupo";
 import ListarGrupos from "../pages/Grupos/ListarGrupos";
 import DetalhesGrupo from "../pages/Grupos/DetalhesGrupo";
 
-import ManipularLider from "../pages/Lideranca/Lider/ManipularLider";
-import ListarLider from "../pages/Lideranca/Lider/ListarLider";
-import DetalhesLider from "../pages/Lideranca/Lider/DetalhesLider";
-
-import ManipularDiscipulador from "../pages/Lideranca/Discipulador/ManipularDiscipulador";
-import ListarDiscipulador from "../pages/Lideranca/Discipulador/ListarDiscipulador";
-import DetalhesDiscipulador from "../pages/Lideranca/Discipulador/DetalhesDiscipulador";
-
-import ManipularDiretor from "../pages/Lideranca/Diretor/ManipularDiretor";
-import ListarDiretor from "../pages/Lideranca/Diretor/ListarDiretor";
-import DetalhesDiretor from "../pages/Lideranca/Diretor/DetalhesDiretor";
-
 const AuthRoutes: React.FC = () => {
     const { authenticated, isLoading } = useAuth();
 
@@ -72,20 +60,6 @@ const AuthRoutes: React.FC = () => {
                 <Route path="/grupos/listar" element={<ListarGrupos />} />
                 <Route path="/grupo/:id" element={<DetalhesGrupo />} />
 
-                <Route path="/lideres/cadastrar" element={<ManipularLider />} />
-                <Route path="/lideres/editar" element={<ManipularLider />} />
-                <Route path="/lideres/listar" element={<ListarLider />} />
-                <Route path="/lider/:id" element={<DetalhesLider />} />
-                
-                <Route path="/discipuladores/cadastrar" element={<ManipularDiscipulador />} />
-                <Route path="/discipuladores/editar" element={<ManipularDiscipulador />} />
-                <Route path="/discipuladores/listar" element={<ListarDiscipulador />} />
-                <Route path="/discipulador/:id" element={<DetalhesDiscipulador />} />
-
-                <Route path="/diretores/cadastrar" element={<ManipularDiretor />} />
-                <Route path="/diretores/editar" element={<ManipularDiretor />} />
-                <Route path="/diretores/listar" element={<ListarDiretor />} />
-                <Route path="/diretor/:id" element={<DetalhesDiretor />} />
             </Routes>
         </Layout>
     )

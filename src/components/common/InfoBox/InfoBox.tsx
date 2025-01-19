@@ -2,23 +2,17 @@ import React from "react";
 
 import styles from "./InfoBox.module.css";
 import { NavLink } from "react-router-dom";
+import { Gift } from "../../../services/giftService";
 
 interface InfoboxProps {
-    title: string;
-    value: number | string;
-    icon?: React.ReactNode;
-    link: string;
+    gift: Gift;
 }
 
-const InfoBox: React.FC<InfoboxProps> = ({ title, value, icon, link }) => {
+const InfoBox: React.FC<InfoboxProps> = ({ gift }) => {
     return (
-        <NavLink to={link} className={styles.link}>
+        <NavLink to={`/gift/${gift.id}`} className={styles.giftCard}>
             <div className={styles.infoBox}>
-                <h3>{title}</h3>
-                <div className={styles.infoBoxContainer}>
-                    {icon}
-                    <h1>{value}</h1>
-                </div>
+                <h3>{gift.name}</h3>
             </div>
         </NavLink>
     );

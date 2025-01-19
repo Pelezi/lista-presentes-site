@@ -1,4 +1,4 @@
-// src/components/ManipularCelula.tsx
+// src/components/ManipularGift.tsx
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -6,29 +6,29 @@ import Form from "../../../components/forms/Form";
 import Input from "../../../components/forms/Input/Input";
 import Button from "../../../components/common/Button";
 import Title from "../../../components/common/Title";
-import { Celula, createOrUpdateCelula, getCelulas } from "../../../services/celulaService";
+import { Gift, createOrUpdateGift, getGifts, addGuiftToGuest } from "../../../services/giftService";
 import Select from "../../../components/forms/Select/Select";
 import { Pessoa, addPessoaToCelula } from "../../../services/pessoaService";
 import Datalist from "../../../components/forms/Datalist";
 import { getIn } from "formik";
 
-const AdicionarACelula: React.FC = () => {
+const AdicionarAGift: React.FC = () => {
     const { pessoaId } = useParams();
     const navigate = useNavigate();
 
-    const [celulas, setCelulas] = React.useState<Celula[]>([]);
+    const [gifts, setGifts] = React.useState<Gift[]>([]);
 
-    const fetchCelulas = async () => {
+    const fetchGifts = async () => {
         try {
-            const celulas = await getCelulas();
-            setCelulas(celulas);
+            const gifts = await getGifts();
+            setGifts(gifts);
         } catch (error) {
-            console.error("Erro ao buscar celulas", error);
+            console.error("Erro ao buscar gifts", error);
         }
     }
 
     React.useEffect(() => {
-        fetchCelulas();
+        fetchGifts();
     }, []);
 
     const initialValues: Pessoa = {
@@ -97,7 +97,7 @@ const AdicionarACelula: React.FC = () => {
                 emailType: Yup.string(),
             })
         ),
-        celulaId: Yup.object().shape({
+        giftId: Yup.object().shape({
             id: Yup.string().required("Campo obrigatório"),
             nome: Yup.string(),
             liderId: Yup.object().shape({
@@ -123,35 +123,36 @@ const AdicionarACelula: React.FC = () => {
             navigate(`/pessoa/${pessoaId}`); // Navigate back to DetalhesPessoa
             alert("Célula salva com sucesso!");
         } catch (error) {
-            console.error("Erro ao salvar celula", error);
-            alert("Erro ao salvar celula. Tente novamente.");
+            console.error("Erro ao salvar gift", error);
+            alert("Erro ao salvar gift. Tente novamente.");
         }
     }
 
     return (
-        <Form
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
-        >
-            {({ errors, touched }) => (
-                <>
-                    <Title>Adicionar Pessoa a Celula</Title>
+        // <Form
+        //     initialValues={initialValues}
+        //     validationSchema={validationSchema}
+        //     onSubmit={onSubmit}
+        // >
+        //     {({ errors, touched }) => (
+        //         <>
+        //             <Title>Adicionar Pessoa a Gift</Title>
 
-                    <Datalist
-                                label="Célula"
-                                name="celulaId.id"
-                                options={celulas}
-                                filterType="include"
-                                errors={getIn(errors, "celulaId.id")}
-                                touched={getIn(touched, "celulaId.id")}
-                            />
+        //             <Datalist
+        //                         label="Célula"
+        //                         name="celulaId.id"
+        //                         options={gifts}
+        //                         filterType="include"
+        //                         errors={getIn(errors, "giftId.id")}
+        //                         touched={getIn(touched, "giftId.id")}
+        //                     />
 
-                    <Button type="submit">Salvar</Button>
-                </>
-            )}
-        </Form>
+        //             <Button type="submit">Salvar</Button>
+        //         </>
+        //     )}
+        // </Form>
+        <div>hi</div>
     );
 };
 
-export default AdicionarACelula;
+export default AdicionarAGift;

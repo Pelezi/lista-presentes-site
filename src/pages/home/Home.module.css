@@ -5,16 +5,6 @@
     width: 100%;
 }
 
-.infoBoxContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-wrap: nowrap;
-    width: 100%;
-    margin-top: 1rem;
-    gap: 1rem;
-}
-
 .section{
     display: flex;
     flex-direction: row;

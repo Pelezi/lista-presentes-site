@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { Celula, deleteCelula, getCelulas } from "../../../services/celulaService";
+import { Gift, deleteGift, getGifts } from "../../../services/giftService";
 import { Column, Table } from "../../../components/common/Table";
 
 
-const ListarCelulas: React.FC = () => {
+const ListarGifts: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [celulas, setCelulas] = useState<Celula[]>([]);
+    const [gifts, setGifts] = useState<Gift[]>([]);
     const [filter, setFilter] = useState<string>("");
 
     useEffect(() => {
@@ -20,31 +20,31 @@ const ListarCelulas: React.FC = () => {
         }
     }, [location.search]);
 
-    const fetchCelulas = async () => {
+    const fetchGifts = async () => {
         try {
-            const celulas = await getCelulas();
-            setCelulas(celulas);
+            const gifts = await getGifts();
+            setGifts(gifts);
         } catch (error) {
-            console.log('Erro ao buscar celulas', error);
+            console.log('Erro ao buscar gifts', error);
         }
     };
 
     useEffect(() => {
-        fetchCelulas();
+        fetchGifts();
     }, []);
 
-    const handleEdit = (celula: Celula) => {
-        navigate("/celulas/editar", { state: celula });
+    const handleEdit = (gift: Gift) => {
+        navigate("/gifts/editar", { state: gift });
     }
 
-    const handleDelete = async (celula: Celula) => {
+    const handleDelete = async (gift: Gift) => {
         try {
-            await deleteCelula(celula.id);
-            fetchCelulas();
-            alert("Celula removida com sucesso!");
+            await deleteGift(gift.id);
+            fetchGifts();
+            alert("Gift removida com sucesso!");
         } catch (error) {
-            console.log("Erro ao remover celula", error);
-            alert("Erro ao remover celula. Tente novamente.");
+            console.log("Erro ao remover gift", error);
+            alert("Erro ao remover gift. Tente novamente.");
         }
     };
 
@@ -53,18 +53,18 @@ const ListarCelulas: React.FC = () => {
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
 
-    const columns: Column<Celula>[] = [
-        { header: "Nome", accessor: (item) => item.nome, type: "celula/", linkAccessor: (item) => item.id},
-        { header: "Discipulador", accessor: (item) => item.discipuladorId?.pessoaId?.nome, type: "discipulador/", linkAccessor: (item) => item.discipuladorId?.id},
-        { header: "Lider", accessor: (item) => item.liderId?.pessoaId?.nome, type: "lider/", linkAccessor: (item) => item.liderId?.id},
-        { header: "Dia", accessor: (item) => capitalize(item.diaDaSemana), type: "celulas/listar?filter=", linkAccessor: (item) => item.diaDaSemana},
-        { header: "Horário", accessor: (item) => item.horario?.split(':').slice(0, 2).join(':'), type: "celulas/listar?filter=", linkAccessor: (item) => item.horario},
-        { header: "Bairro", accessor: (item) => item.enderecoId?.bairro, type: "celulas/listar?filter=", linkAccessor: (item) => item.enderecoId?.bairro},
+    const columns: Column<Gift>[] = [
+        { header: "Nome", accessor: (item) => item.name, type: "gift/", linkAccessor: (item) => item.id},
+        // { header: "Discipulador", accessor: (item) => item.discipuladorId?.pessoaId?.nome, type: "discipulador/", linkAccessor: (item) => item.discipuladorId?.id},
+        // { header: "Lider", accessor: (item) => item.liderId?.pessoaId?.nome, type: "lider/", linkAccessor: (item) => item.liderId?.id},
+        // { header: "Dia", accessor: (item) => capitalize(item.diaDaSemana), type: "gifts/listar?filter=", linkAccessor: (item) => item.diaDaSemana},
+        // { header: "Horário", accessor: (item) => item.horario?.split(':').slice(0, 2).join(':'), type: "gifts/listar?filter=", linkAccessor: (item) => item.horario},
+        // { header: "Bairro", accessor: (item) => item.enderecoId?.bairro, type: "gifts/listar?filter=", linkAccessor: (item) => item.enderecoId?.bairro},
     ];
     return (
         <Table
             columns={columns}
-            data={celulas}
+            data={gifts}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
             initialFilter={filter}
@@ -72,4 +72,4 @@ const ListarCelulas: React.FC = () => {
     )
 };
 
-export default ListarCelulas;
+export default ListarGifts;
