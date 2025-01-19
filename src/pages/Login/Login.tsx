@@ -41,9 +41,10 @@ const Login = () => {
             const guest = await loginService(values);
             login(guest);
             navigate('/home');
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
-            alert('Erro ao realizar login');
+            const errorMessage = error.response?.data?.Erro || 'Erro ao realizar login';
+            alert(errorMessage);
         }
     };
 
@@ -59,35 +60,31 @@ const Login = () => {
                         validationSchema={validationSchema}
                         onSubmit={onSubmit}
                     >
-                        {({ errors, touched}) => (
+                        {({ errors, touched }) => (
                             <>
-                        <div className={styles.inputBox}>
-                            <Input 
-                                label="Nome"
-                                name="name"
-                                type="text"
-                                errors={errors.name}
-                                touched={touched.name} 
-                                placeholder="Nome completo" 
-                            />
-                        </div>
+                                <div className={styles.inputBox}>
+                                    <Input
+                                        label="Nome"
+                                        name="name"
+                                        type="text"
+                                        errors={errors.name}
+                                        touched={touched.name}
+                                        placeholder="Nome completo"
+                                    />
+                                </div>
 
-                        <div className={styles.inputBox}>
-                            <Input 
-                                label="Telefone"
-                                name="phone"
-                                type="text"
-                                phone
-                                errors={errors.phone}
-                                touched={touched.phone} 
-                                placeholder="(xx) x xxxx-xxxx"
-                            />
-                        </div>
-                        <Button type="submit">Entrar</Button>
-
-                        <div className={styles.inputBox}>
-                            <p>Não Tem Uma Conta? <a href="#">Inscrever-se</a></p>
-                        </div>
+                                <div className={styles.inputBox}>
+                                    <Input
+                                        label="Telefone"
+                                        name="phone"
+                                        type="text"
+                                        phone
+                                        errors={errors.phone}
+                                        touched={touched.phone}
+                                        placeholder="(xx) x xxxx-xxxx"
+                                    />
+                                </div>
+                                <Button type="submit">Entrar</Button>
                             </>
                         )}
                     </Form>

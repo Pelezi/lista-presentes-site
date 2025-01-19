@@ -1,15 +1,13 @@
-.sidebar.hide {
-    width: 90px;
-}
-
 .sidebar {
-    width: 270px;
+    width: 100%;
     padding: 0;
     position: fixed;
-    top: 0;
+    bottom: 0;
     background-color: #a5d6bb;
     transition: width 0.3s ease-in-out;
-    height: 100%;
+    height: 10vh;
+    align-content: center;
+    padding: 1vh;
 }
 
 .content {
@@ -17,26 +15,20 @@
     padding: 1rem;
     flex: 1;
     justify-content: center;
-    overflow-y: auto;
-    height: 100%;
+    width: 100%;
     box-sizing: border-box;
-    width: calc(100% - 285px);
-    position: fixed;
-    right: 0;
+    height: calc(100% - 10vh);
+    left: 0;
     transition: width 0.3s ease-in-out;
 
 }
 
-.sidebar.hide ~ .content {
-    width: calc(100% - 100px);
-}
-
 .container {
-    height: 100%;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     background-color: #E4E9F7;
+    padding-bottom: 10vh;
+    min-height: calc(100vh - 10vh);
 }
 
 .main {
@@ -45,13 +37,8 @@
     height: 100%;
 }
 
-@media screen and (max-width: 600px) {
-    .sidebarToggle {
-        display: block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        padding: 1rem;
-        cursor: pointer;
+@media (max-width: 768px) {
+    .sidebar {
+        height: 5vh;
     }
 }

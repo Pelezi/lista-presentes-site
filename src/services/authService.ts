@@ -14,6 +14,6 @@ export const login = async (guest: Guest): Promise<Guest> => {
         ...guest,
         phone: formatPhone(guest.phone),
     };
-    const response = await api.get<Guest>(`/guests/phone/${formattedGuest.phone}/name/${formattedGuest.name}`);
+    const response = await api.post<Guest>(`/guests/phone/${formattedGuest.phone}/name/${formattedGuest.name}`);
     return response.data;
 }

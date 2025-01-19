@@ -116,8 +116,6 @@ const Home = () => {
                         icon={<FaUserGroup size={65} />}
                         link="/discipuladores/listar"
                     />
-                </div>
-                <div className={styles.section}>
                     <InfoBox
                         title="Grupos cadastrados"
                         value={grupos.length}
