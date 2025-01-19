@@ -46,8 +46,8 @@ const Login = () => {
 
     return (
         <div className={styles.loginWrapper}>
-            <img className={`${styles.buque} ${styles.buquel}`} src="/src/Assets/img/floral-header-left.png" alt="" />
-            <img className={`${styles.buque} ${styles.buquer}`} src="/src/Assets/img/floral-header-right.png" alt="" />
+            <img className={`${styles.buque} ${styles.buquel}`} src="https://i.imgur.com/WUCmF9r.png" alt="" />
+            <img className={`${styles.buque} ${styles.buquer}`} src="https://i.imgur.com/hQ48o4g.png" alt="" />
             <div className={styles.contentBox}>
                 <div className={styles.formBox}>
                     <h2>Login</h2>
