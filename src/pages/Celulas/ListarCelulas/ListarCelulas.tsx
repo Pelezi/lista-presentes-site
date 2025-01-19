@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { Gift, deleteGift, getGifts } from "../../../services/giftService";
-import { Column, Table } from "../../../components/common/Table";
 
 
 const ListarGifts: React.FC = () => {
@@ -53,22 +52,16 @@ const ListarGifts: React.FC = () => {
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
 
-    const columns: Column<Gift>[] = [
-        { header: "Nome", accessor: (item) => item.name, type: "gift/", linkAccessor: (item) => item.id},
-        // { header: "Discipulador", accessor: (item) => item.discipuladorId?.pessoaId?.nome, type: "discipulador/", linkAccessor: (item) => item.discipuladorId?.id},
-        // { header: "Lider", accessor: (item) => item.liderId?.pessoaId?.nome, type: "lider/", linkAccessor: (item) => item.liderId?.id},
-        // { header: "Dia", accessor: (item) => capitalize(item.diaDaSemana), type: "gifts/listar?filter=", linkAccessor: (item) => item.diaDaSemana},
-        // { header: "Horário", accessor: (item) => item.horario?.split(':').slice(0, 2).join(':'), type: "gifts/listar?filter=", linkAccessor: (item) => item.horario},
-        // { header: "Bairro", accessor: (item) => item.enderecoId?.bairro, type: "gifts/listar?filter=", linkAccessor: (item) => item.enderecoId?.bairro},
-    ];
+    // const columns: Column<Gift>[] = [
+    //     { header: "Nome", accessor: (item) => item.name, type: "gift/", linkAccessor: (item) => item.id},
+    //     // { header: "Discipulador", accessor: (item) => item.discipuladorId?.pessoaId?.nome, type: "discipulador/", linkAccessor: (item) => item.discipuladorId?.id},
+    //     // { header: "Lider", accessor: (item) => item.liderId?.pessoaId?.nome, type: "lider/", linkAccessor: (item) => item.liderId?.id},
+    //     // { header: "Dia", accessor: (item) => capitalize(item.diaDaSemana), type: "gifts/listar?filter=", linkAccessor: (item) => item.diaDaSemana},
+    //     // { header: "Horário", accessor: (item) => item.horario?.split(':').slice(0, 2).join(':'), type: "gifts/listar?filter=", linkAccessor: (item) => item.horario},
+    //     // { header: "Bairro", accessor: (item) => item.enderecoId?.bairro, type: "gifts/listar?filter=", linkAccessor: (item) => item.enderecoId?.bairro},
+    // ];
     return (
-        <Table
-            columns={columns}
-            data={gifts}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-            initialFilter={filter}
-        />
+        <div>hi</div>
     )
 };
 

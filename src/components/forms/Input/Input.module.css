@@ -2,7 +2,7 @@
     display: flex; 
     flex-direction: column;
     margin-bottom: 20px;
-    width: 100%;
+    /* width: 100%; */
     border: none;
 }
 
@@ -15,8 +15,9 @@
     padding: 10px;
     border-radius: 5px;
     border: none;
-    background-color: #ffffff;
+    background-color: #ecf2f7;
     margin-top: 5px;
+    color: rgb(34, 107, 190);
 }
 
 .error {

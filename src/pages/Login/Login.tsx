@@ -9,7 +9,6 @@ import styles from "./Login.module.css";
 import Input from "../../components/forms/Input";
 import Form from "../../components/forms/Form";
 import Button from "../../components/common/Button";
-import Title from "../../components/common/Title";
 
 import { Guest, login as loginService } from "../../services/authService";
 
@@ -25,6 +24,7 @@ const Login = () => {
     const { login } = useAuth();
 
     const initialValues: Guest = {
+        id: "",
         name: "",
         phone: "",
     };
@@ -54,7 +54,7 @@ const Login = () => {
             <img className={`${styles.buque} ${styles.buquer}`} src={buqueRight} alt="" />
             <div className={styles.contentBox}>
                 <div className={styles.formBox}>
-                    <h2>Login</h2>
+                    <h2>Acessar</h2>
                     <Form
                         initialValues={initialValues}
                         validationSchema={validationSchema}

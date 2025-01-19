@@ -1,0 +1,92 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Gift, getGiftsById, addGuiftToGuest } from "../../../services/giftService";
+import styles from "./DetalhesGiftGuest.module.css";
+import Button from "../../../components/common/Button";
+import Input from "../../../components/forms/Input";
+import { useAuth } from "../../../contexts/AuthContext";
+import * as Yup from "yup";
+import Form from "../../../components/forms/Form";
+
+const DetalhesGift: React.FC = () => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const { guest } = useAuth();
+    const [gift, setGift] = useState<Gift>({} as Gift);
+    const [quantity, setQuantity] = useState(1);
+    const [availableQuantity, setAvailableQuantity] = useState(0);
+
+    const fetchGift = async () => {
+        try {
+            const gift = await getGiftsById(String(id));
+            setGift(gift);
+            const totalCount = gift.guests?.reduce((sum, guest) => sum + guest.count, 0) || 0;
+            setAvailableQuantity(gift.quantity - totalCount);
+        } catch (error) {
+            console.log('Erro ao buscar presente', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchGift();
+    }, []);
+
+    const initialValues = {
+        quantity: 1,
+    };
+
+    const validationSchema = Yup.object().shape({
+        quantity: Yup.number()
+            .min(1, "Quantidade mínima é 1")
+            .max(availableQuantity, `Quantidade máxima é ${availableQuantity}`)
+            .required("Quantidade é obrigatória"),
+    });
+
+    const handleReserveGift = async (values: { quantity: number }) => {
+        try {
+            for (let i = 0; i < values.quantity; i++) {
+                await addGuiftToGuest(gift.id, guest.id);
+            }
+            alert("Presente reservado com sucesso!");
+            fetchGift();
+        } catch (error) {
+            console.log("Erro ao reservar presente", error);
+            alert("Erro ao reservar presente. Tente novamente.");
+        }
+    };
+
+    return (
+        <div className={styles.detalhesPage}>
+            <div className={styles.section}>
+                <h1>{gift.name}</h1>
+                <img src={gift.photoUrl} alt={gift.name} className={styles.giftImage} />
+                <p>{gift.description}</p>
+                <p>Quantidade disponível: {availableQuantity}/{gift.quantity}</p>
+                <div className={styles.reserveSection}>
+                    <Form
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={handleReserveGift}
+                    >
+                        {({ errors, touched }) => (
+                            <>
+                                <div className={styles.inputBox}>
+                                    <Input
+                                        label="Quantidade"
+                                        name="quantity"
+                                        type="number"
+                                        errors={errors.quantity}
+                                        touched={touched.quantity}
+                                    />
+                                </div>
+                                <Button type="submit">Escolher</Button>
+                            </>
+                        )}
+                    </Form>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default DetalhesGift;

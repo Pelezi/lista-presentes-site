@@ -5,14 +5,14 @@
     bottom: 0;
     background-color: #a5d6bb;
     transition: width 0.3s ease-in-out;
-    height: 10vh;
+    height: 5vh;
     align-content: center;
     padding: 1vh;
 }
 
 .content {
     display: flex;
-    padding: 1rem;
+    padding: 4rem 1rem 1rem 1rem;
     flex: 1;
     justify-content: center;
     width: 100%;
@@ -26,7 +26,6 @@
 .container {
     display: flex;
     flex-direction: column;
-    background-color: #E4E9F7;
     padding-bottom: 10vh;
     min-height: calc(100vh - 10vh);
 }
@@ -37,8 +36,29 @@
     height: 100%;
 }
 
+
+.buque {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    max-width: 100%;
+}
+
+.buque.buquel {
+    left: 0;
+}
+
+.buque.buquer {
+    right: 0;
+}
+
+
 @media (max-width: 768px) {
     .sidebar {
         height: 5vh;
+    }
+
+    .buque {
+        max-width: 35%;
     }
 }

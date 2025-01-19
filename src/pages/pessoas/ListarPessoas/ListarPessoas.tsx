@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Table, Column } from "../../../components/common/Table";
 import { Pessoa, deletePessoa, getPessoas } from "../../../services/pessoaService";
 
 const ListarPessoa: React.FC = () => {
@@ -51,21 +50,22 @@ const ListarPessoa: React.FC = () => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
 
-    const columns: Column<Pessoa>[] = [
-        { header: "Nome", accessor: (item) => item.nome, type: "pessoa/", linkAccessor: (item) => item.id },
-        { header: "Cargo", accessor: (item) => item.cargo === "frequentador_assiduo" ? "Frequentador assíduo" : item.cargo ? capitalize(item.cargo) : undefined, type: "pessoas/listar?filter=", linkAccessor: (item) => item.cargo },
-        { header: "Bairro", accessor: (item) => item.enderecoId?.bairro ? capitalize(item.enderecoId?.bairro) : undefined, type: "pessoas/listar?filter=", linkAccessor: (item) => item.enderecoId?.bairro},
-        { header: "Célula", accessor: (item) => item.celulaId?.nome ? capitalize(item.celulaId?.nome) : undefined, type: "celula/", linkAccessor: (item) => item.celulaId?.id},
-    ];
+    // const columns: Column<Pessoa>[] = [
+    //     { header: "Nome", accessor: (item) => item.nome, type: "pessoa/", linkAccessor: (item) => item.id },
+    //     { header: "Cargo", accessor: (item) => item.cargo === "frequentador_assiduo" ? "Frequentador assíduo" : item.cargo ? capitalize(item.cargo) : undefined, type: "pessoas/listar?filter=", linkAccessor: (item) => item.cargo },
+    //     { header: "Bairro", accessor: (item) => item.enderecoId?.bairro ? capitalize(item.enderecoId?.bairro) : undefined, type: "pessoas/listar?filter=", linkAccessor: (item) => item.enderecoId?.bairro},
+    //     { header: "Célula", accessor: (item) => item.celulaId?.nome ? capitalize(item.celulaId?.nome) : undefined, type: "celula/", linkAccessor: (item) => item.celulaId?.id},
+    // ];
 
     return (
-        <Table
-            columns={columns}
-            data={pessoas}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-            initialFilter={filter}  // Pass initial filter to Table component
-        />
+        // <Table
+        //     columns={columns}
+        //     data={pessoas}
+        //     handleEdit={handleEdit}
+        //     handleDelete={handleDelete}
+        //     initialFilter={filter}  // Pass initial filter to Table component
+        // />
+        <div>hi</div>
     );
 };
 

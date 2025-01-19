@@ -21,10 +21,6 @@ export interface InputProps {
     phone?: boolean;
 };
 
-const formatPhone = (value: string) => {
-    return value.replace(/\D/g, '');
-};
-
 const Input: React.FC<InputProps> = ({ label, name, type = "text", as, errors, touched, children, className, hidden, readonly, hiddenLabel, placeholder, phone }) => {
 
     return (

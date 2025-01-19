@@ -8,7 +8,7 @@ export interface Gift {
     description: string;
     guests?: Array<
         {
-            count: string;
+            count: number; // changed from string to number
             guest:{
                 id: string;
                 name: string;
@@ -50,7 +50,7 @@ export const deleteGift = async (id: string ): Promise<Gift> => {
 }
 
 export const addGuiftToGuest = async (giftId: string, guestId: string): Promise<Gift> => {
-    const response = await api.put<Gift>(`/gifts/${giftId}/guest/${guestId}`);
+    const response = await api.post<Gift>(`/gifts/${giftId}/guest/${guestId}`);
     return response.data;
 }
 

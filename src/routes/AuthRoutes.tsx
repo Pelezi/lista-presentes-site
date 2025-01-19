@@ -18,11 +18,8 @@ import AdicionarAGrupo from "../pages/pessoas/Grupo/AdicionarAGrupo";
 
 import ManipularCelula from "../pages/Celulas/ManipularCelula";
 import ListarCelulas from "../pages/Celulas/ListarCelulas";
-import DetalhesCelula from "../pages/Celulas/DetalhesCelula";
-
-import ManipularGrupo from "../pages/Grupos/ManipularGrupo";
-import ListarGrupos from "../pages/Grupos/ListarGrupos";
-import DetalhesGrupo from "../pages/Grupos/DetalhesGrupo";
+import DetalhesCelula from "../pages/Celulas/DetalhesCelulaAdmin";
+import DetalhesGiftGuest from "../pages/Celulas/DetalhesGiftGuest";
 
 const AuthRoutes: React.FC = () => {
     const { authenticated, isLoading } = useAuth();
@@ -53,12 +50,8 @@ const AuthRoutes: React.FC = () => {
                 <Route path="/celulas/cadastrar" element={<ManipularCelula />} />
                 <Route path="/celulas/editar" element={<ManipularCelula />} />
                 <Route path="/celulas/listar" element={<ListarCelulas />} />
-                <Route path="/celula/:id" element={<DetalhesCelula />} />
-
-                <Route path="/grupos/cadastrar" element={<ManipularGrupo />} />
-                <Route path="/grupos/editar" element={<ManipularGrupo />} />
-                <Route path="/grupos/listar" element={<ListarGrupos />} />
-                <Route path="/grupo/:id" element={<DetalhesGrupo />} />
+                <Route path="/gift/:id/admin" element={<DetalhesCelula />} />
+                <Route path="/gift/:id" element={<DetalhesGiftGuest />} />
 
             </Routes>
         </Layout>

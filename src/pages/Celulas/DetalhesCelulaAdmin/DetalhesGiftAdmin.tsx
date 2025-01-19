@@ -9,7 +9,7 @@ import { Grupo, getGruposByIntegranteId } from "../../../services/grupoService";
 
 import { useParams } from "react-router-dom";
 
-import styles from "./DetalhesCelula.module.css";
+import styles from "./DetalhesGiftAdmin.module.css";
 import Button from "../../../components/common/Button";
 import { FaPencil, FaPlus, FaRegTrashCan } from "react-icons/fa6";
 
