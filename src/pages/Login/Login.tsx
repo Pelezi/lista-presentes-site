@@ -15,6 +15,9 @@ import { Guest, login as loginService } from "../../services/authService";
 
 import { useAuth } from "../../contexts/AuthContext";
 
+import buqueLeft from "../../Assets/img/floral-header-left.png";
+import buqueRight from "../../Assets/img/floral-header-right.png";
+
 const Login = () => {
 
     const navigate = useNavigate();
@@ -46,8 +49,8 @@ const Login = () => {
 
     return (
         <div className={styles.loginWrapper}>
-            <img className={`${styles.buque} ${styles.buquel}`} src="https://i.imgur.com/WUCmF9r.png" alt="" />
-            <img className={`${styles.buque} ${styles.buquer}`} src="https://i.imgur.com/hQ48o4g.png" alt="" />
+            <img className={`${styles.buque} ${styles.buquel}`} src={buqueLeft} alt="" />
+            <img className={`${styles.buque} ${styles.buquer}`} src={buqueRight} alt="" />
             <div className={styles.contentBox}>
                 <div className={styles.formBox}>
                     <h2>Login</h2>
