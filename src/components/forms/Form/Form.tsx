@@ -24,7 +24,6 @@ const Form = <T extends FormikValues>({ initialValues, validationSchema, onSubmi
             >
                 {(formikProps) => (
                     <FormikForm 
-                        // className={styles.form}
                     >
                         {children(formikProps)}
                     </FormikForm>

@@ -5,7 +5,15 @@ export interface Guest {
     phone: string;
 }
 
-export const login = async (Guest: Guest): Promise<Guest> => {
-    const response = await api.post<Guest>(`/guests/phone/${Guest.phone}/name/${Guest.name}`);
+const formatPhone = (phone: string): string => {
+    return phone.replace(/\D/g, '');
+};
+
+export const login = async (guest: Guest): Promise<Guest> => {
+    const formattedGuest = {
+        ...guest,
+        phone: formatPhone(guest.phone),
+    };
+    const response = await api.get<Guest>(`/guests/phone/${formattedGuest.phone}/name/${formattedGuest.name}`);
     return response.data;
-} 
+}
