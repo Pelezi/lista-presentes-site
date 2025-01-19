@@ -30,7 +30,6 @@ const Home = () => {
     return (
         <main className={styles.container}>
             <Title className={styles.title}>Bem-vinda a minha Lista de Presentes</Title>
-            <p>Esta é a página inicial onde podemos encontrar algumas estatísticas.</p>
             <div className={styles.section}>
                 {gifts.map((gift) => (
                     <InfoBox
