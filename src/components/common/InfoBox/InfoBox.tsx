@@ -13,19 +13,17 @@ const InfoBox: React.FC<InfoboxProps> = ({ gift }) => {
 
     useEffect(() => {
         const fetchGiftData = async () => {
-            const updatedGift = await getGiftsById(gift.id);
-            const totalCount = updatedGift.guests?.reduce((sum, guest) => sum + guest.count, 0) || 0;
-            setIsUnavailable(totalCount >= updatedGift.quantity);
-            setAvailableQuantity(updatedGift.quantity - totalCount);
+            setIsUnavailable((gift.count ?? 0) >= gift.quantity);
+            setAvailableQuantity(gift.quantity - (gift.count ?? 0));
         };
 
         fetchGiftData();
-    }, []);
+    }, [gift.id]); 
 
     return (
         <div className={`${styles.card} ${isUnavailable ? styles.unavailable : ''}`}>
             <div className={styles.cardBody}>
-                <img src={gift.photoUrl} className={styles.cardImage} alt={gift.name} />
+                <img src={gift.photoUrl} className={styles.cardImage} alt={gift.name} /> {/* Added fallback for photoUrl */}
                 <h2 className={styles.cardTitle}>{gift.name}</h2>
                 <p className={styles.cardDescription}>{gift.description}</p>
                 <p className={styles.cardQuantity}>Quantidade Disponível: {availableQuantity}/{gift.quantity}</p>

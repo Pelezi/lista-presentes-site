@@ -8,7 +8,7 @@ export interface Gift {
     description: string;
     guests?: Array<
         {
-            count: number; // changed from string to number
+            count: number;
             guest:{
                 id: string;
                 name: string;
@@ -17,6 +17,7 @@ export interface Gift {
             };
         }
     >;
+    count?: number;
 }
 
 export const createGift = async (gift: Gift): Promise<Gift> => {
