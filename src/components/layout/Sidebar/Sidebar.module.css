@@ -53,22 +53,10 @@
     align-content: center;
 }
 
-.navigation  .link:hover {
-    background-color: #4aa4ee;
-}
-
-.link:hover .icon,
-.navigation  .link:hover .text {
-    color: #a5d6bb;
-}
-
 /* --- Begin src\components\layout\Sidebar\Sidebar.module.css --- */
 
 .navigation  .link.activeLink {
     background-color: #8dceaa;  /* Active background color */
-}
-.navigation  .link.activeLink:hover {
-    background-color: #4aa4ee;
 }
 
 /* Add the rest of your styles as necessary */
