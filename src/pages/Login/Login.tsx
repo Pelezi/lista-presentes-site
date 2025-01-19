@@ -40,7 +40,7 @@ const Login = () => {
         try {
             const guest = await loginService(values);
             login(guest);
-            navigate('/home');
+            navigate('/');
         } catch (error: any) {
             console.log(error);
             const errorMessage = error.response?.data?.Erro || 'Erro ao realizar login';

@@ -20,7 +20,7 @@ const Sidebar: React.FC = ({ }) => {
                     isActive ? `${styles.link} ${styles.activeLink}` : styles.link
                 )
                 }
-                to="/home"
+                to="/"
                 onClick={() => { { } }}
             >
                 <FaGift className={styles.icon} />
@@ -41,7 +41,7 @@ const Sidebar: React.FC = ({ }) => {
                 className={({ isActive }) =>
                     isActive ? `${styles.link} ${styles.activeLink}` : styles.link
                 }
-                to="/"
+                to="/Login"
                 onClick={logout}
             >
                 <MdLogout className={`${styles.icon} ${styles.logout}`} />

@@ -39,7 +39,7 @@ const AuthRoutes: React.FC = () => {
     return (
         <Layout>
             <Routes>
-                <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 
                 <Route path="/pessoas/cadastrar" element={<ManipularPessoas />} />
                 <Route path="/pessoas/editar" element={<ManipularPessoas />} />
