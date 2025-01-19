@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.infoBoxContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.section{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.title {
+    font-size: 30px;
+    margin: 0;
+}

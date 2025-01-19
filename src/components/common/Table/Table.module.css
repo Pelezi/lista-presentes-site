@@ -1,0 +1,76 @@
+.TableWrapper {
+    width: 100%;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    height: fit-content;
+}
+
+
+
+.td {
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.filterButton {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.filterButton Button {
+    height: 40px;
+}
+
+.filterInput {
+    padding: 7px 20px;
+    margin: 0px 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    height: 40px;
+}
+
+img {
+    width: 100px;
+}
+
+
+.table tr:nth-child(even) {
+    background-color: rgba(242, 242, 242, 0.5);
+    transition: 0.3s;
+}
+
+.table tr:nth-child(odd) {
+    background-color: rgba(233, 233, 233, 0.5);
+    transition: 0.3s;
+}
+
+.table tr.row:hover {
+    background-color: rgba(242, 242, 242, 0.7);
+}
+
+.link {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: black;
+}
+
+.buttons {
+    text-align: center;
+}
+
+.buttons button {
+    margin: 5px;
+}

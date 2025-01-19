@@ -1,0 +1,57 @@
+.sidebar.hide {
+    width: 90px;
+}
+
+.sidebar {
+    width: 270px;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    background-color: #a5d6bb;
+    transition: width 0.3s ease-in-out;
+    height: 100vh;
+}
+
+.content {
+    display: flex;
+    padding: 1rem;
+    flex: 1;
+    justify-content: center;
+    overflow-y: auto;
+    height: 100%;
+    box-sizing: border-box;
+    width: calc(100% - 285px);
+    position: fixed;
+    right: 0;
+    transition: width 0.3s ease-in-out;
+
+}
+
+.sidebar.hide ~ .content {
+    width: calc(100% - 100px);
+}
+
+.container {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #E4E9F7;
+}
+
+.main {
+    display: flex;
+    flex: 1;
+    height: 100vh;
+}
+
+@media screen and (max-width: 600px) {
+    .sidebarToggle {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 1rem;
+        cursor: pointer;
+    }
+}
