@@ -10,10 +10,8 @@ import Form from "../../../components/forms/Form";
 
 const DetalhesGift: React.FC = () => {
     const { id } = useParams();
-    const navigate = useNavigate();
     const { guest } = useAuth();
     const [gift, setGift] = useState<Gift>({} as Gift);
-    const [quantity, setQuantity] = useState(1);
     const [availableQuantity, setAvailableQuantity] = useState(0);
 
     const fetchGift = async () => {
@@ -56,7 +54,7 @@ const DetalhesGift: React.FC = () => {
     };
 
     return (
-        <div className={styles.detalhesPage}>
+        <div>
             <div className={styles.section}>
                 <h1>{gift.name}</h1>
                 <img src={gift.photoUrl} alt={gift.name} className={styles.giftImage} />
