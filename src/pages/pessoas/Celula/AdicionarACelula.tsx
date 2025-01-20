@@ -6,7 +6,7 @@ import Form from "../../../components/forms/Form";
 import Input from "../../../components/forms/Input/Input";
 import Button from "../../../components/common/Button";
 import Title from "../../../components/common/Title";
-import { Gift, createOrUpdateGift, getGifts, addGuiftToGuest } from "../../../services/giftService";
+import { Gift, createOrUpdateGift, getGifts, addGiftToGuest } from "../../../services/giftService";
 import Select from "../../../components/forms/Select/Select";
 import { Pessoa, addPessoaToCelula } from "../../../services/pessoaService";
 import Datalist from "../../../components/forms/Datalist";

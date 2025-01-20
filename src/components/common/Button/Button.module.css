@@ -19,15 +19,11 @@
 }
 
 .deleteButton {
-    color: #ff3333;
-    background-color: transparent;
-    padding: 0;
+    background-color: rgb(201, 8, 156);
 }
 
 .deleteButton:hover {
-    color: #ac1f1f;
-    background-color: transparent;
-    padding: 0;
+    background-color: rgb(146, 4, 113);
 }
 
 .greenButton {

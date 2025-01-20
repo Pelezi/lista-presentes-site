@@ -5,13 +5,13 @@ import { NavLink } from "react-router-dom";
 import styles from "./Sidebar.module.css";
 
 import { useAuth } from "../../../contexts/AuthContext";
-import { FaGift } from "react-icons/fa6";
+import { FaGift, FaGears } from "react-icons/fa6";
 import { MdOutlineShoppingCart, MdLogout } from "react-icons/md";
 
 
 const Sidebar: React.FC = ({ }) => {
 
-    const { logout } = useAuth();
+    const { logout, guest } = useAuth();
 
     return (
         <nav className={`${styles.navigation}`}>
@@ -29,13 +29,23 @@ const Sidebar: React.FC = ({ }) => {
                 className={({ isActive }) =>
                     isActive ? `${styles.link} ${styles.activeLink}` : styles.link
                 }
-                to="/pessoas/listar"
+                to="/meus-presentes"
                 onClick={() => { }}
             >
                 <MdOutlineShoppingCart className={styles.icon} />
             </NavLink>
 
-
+            {(guest?.phone === "81998625897" || guest?.phone === "81997250606") && (
+                <NavLink
+                    className={({ isActive }) =>
+                        isActive ? `${styles.link} ${styles.activeLink}` : styles.link
+                    }
+                    to="/admin"
+                    onClick={() => { }}
+                >
+                    <FaGears className={styles.icon} />
+                </NavLink>
+            )}
 
             <NavLink
                 className={({ isActive }) =>

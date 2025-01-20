@@ -7,7 +7,9 @@ import Layout from '../components/layout';
 import { useAuth } from "../contexts/AuthContext";
 
 import Home from '../pages/home';
-import ListarPessoas from '../pages/pessoas/ListarPessoas';
+import Admin from '../pages/Admin';
+
+import MeusPresentes from '../pages/pessoas/MeusPresentes';
 import ManipularPessoas from '../pages/pessoas/ManipularPessoas';
 import DetalhesPessoa from "../pages/pessoas/DetalhesPessoa";
 import CriarPhone from "../pages/pessoas/Phone/CriarPhone";
@@ -16,10 +18,12 @@ import CriarEmail from "../pages/pessoas/Email/CriarEmail";
 import AdicionarACelula from "../pages/pessoas/Celula/AdicionarACelula";
 import AdicionarAGrupo from "../pages/pessoas/Grupo/AdicionarAGrupo";
 
-import ManipularCelula from "../pages/Celulas/ManipularCelula";
+import ManipularCelula from "../pages/Celulas/ManipularGift";
 import ListarCelulas from "../pages/Celulas/ListarCelulas";
 import DetalhesCelula from "../pages/Celulas/DetalhesCelulaAdmin";
 import DetalhesGiftGuest from "../pages/Celulas/DetalhesGiftGuest";
+import RemoveGiftGuest from "../pages/Celulas/RemoveGiftGuest";
+import ManipularGift from "../pages/Celulas/ManipularGift";
 
 const AuthRoutes: React.FC = () => {
     const { authenticated, isLoading } = useAuth();
@@ -38,9 +42,10 @@ const AuthRoutes: React.FC = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 
+                <Route path="/meus-presentes" element={<MeusPresentes />} />
+
                 <Route path="/pessoas/cadastrar" element={<ManipularPessoas />} />
                 <Route path="/pessoas/editar" element={<ManipularPessoas />} />
-                <Route path="/pessoas/listar" element={<ListarPessoas />} />
                 <Route path="/pessoa/:id" element={<DetalhesPessoa />} />
                 <Route path="pessoas/phones/cadastrar/:pessoaId" element={<CriarPhone />}/>
                 <Route path="pessoas/emails/cadastrar/:pessoaId" element={<CriarEmail />}/>
@@ -52,6 +57,11 @@ const AuthRoutes: React.FC = () => {
                 <Route path="/celulas/listar" element={<ListarCelulas />} />
                 <Route path="/gift/:id/admin" element={<DetalhesCelula />} />
                 <Route path="/gift/:id" element={<DetalhesGiftGuest />} />
+                <Route path="/gift/:id/remove" element={<RemoveGiftGuest />} />
+                <Route path="/gifts/cadastrar" element={<ManipularGift />} />
+                <Route path="/gifts/editar" element={<ManipularGift />} />
+
+                <Route path="/admin" element={<Admin />} />
 
             </Routes>
         </Layout>

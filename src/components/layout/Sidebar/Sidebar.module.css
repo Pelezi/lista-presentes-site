@@ -51,6 +51,7 @@
     transition: all 0.3s ease;
     justify-items: center;
     align-content: center;
+    color: rgb(34, 107, 190);
 }
 
 /* --- Begin src\components\layout\Sidebar\Sidebar.module.css --- */

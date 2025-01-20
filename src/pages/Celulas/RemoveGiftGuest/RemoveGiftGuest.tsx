@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Gift, getGiftsById, addGiftToGuest } from "../../../services/giftService";
-import styles from "./DetalhesGiftGuest.module.css";
+import { Gift, getGiftsById, removeGiftFromGuest } from "../../../services/giftService";
+import styles from "./RemoveGiftGuest.module.css";
 import Button from "../../../components/common/Button";
 import Input from "../../../components/forms/Input";
 import { useAuth } from "../../../contexts/AuthContext";
 import * as Yup from "yup";
 import Form from "../../../components/forms/Form";
 
-const DetalhesGift: React.FC = () => {
+const RemoveGiftGuest: React.FC = () => {
     const { id } = useParams();
     const { guest } = useAuth();
     const [gift, setGift] = useState<Gift>({} as Gift);
-    const [availableQuantity, setAvailableQuantity] = useState(0);
+    const [chosenQuantity, setChosenQuantity] = useState(0);
 
     const fetchGift = async () => {
         try {
             const gift = await getGiftsById(String(id));
             setGift(gift);
-            const totalCount = gift.guests?.reduce((sum, guest) => sum + guest.count, 0) || 0;
-            setAvailableQuantity(gift.quantity - totalCount);
+            
+            const userCount = gift.guests?.find(g => g.guest.id === guest.id)?.count || 0;
+            setChosenQuantity(userCount);
         } catch (error) {
             console.log('Erro ao buscar presente', error);
         }
@@ -36,14 +37,14 @@ const DetalhesGift: React.FC = () => {
     const validationSchema = Yup.object().shape({
         quantity: Yup.number()
             .min(1, "Quantidade mínima é 1")
-            .max(availableQuantity, `Quantidade máxima é ${availableQuantity}`)
+            .max(chosenQuantity, `Quantidade máxima é ${chosenQuantity}`)
             .required("Quantidade é obrigatória"),
     });
 
-    const handleReserveGift = async (values: { quantity: number }) => {
+    const handleRemoveGift = async (values: { quantity: number }) => {
         try {
             for (let i = 0; i < values.quantity; i++) {
-                await addGiftToGuest(gift.id, guest.id);
+                await removeGiftFromGuest(gift.id, guest.id);
             }
             alert("Presente reservado com sucesso!");
             fetchGift();
@@ -58,12 +59,12 @@ const DetalhesGift: React.FC = () => {
                 <h1>{gift.name}</h1>
                 <img src={gift.photoUrl} alt={gift.name} className={styles.giftImage} />
                 <p>{gift.description}</p>
-                <p>Quantidade disponível: {availableQuantity}/{gift.quantity}</p>
+                <p>Quantidade escolhida: {chosenQuantity}/{gift.quantity}</p>
                 <div className={styles.reserveSection}>
                     <Form
                         initialValues={initialValues}
                         validationSchema={validationSchema}
-                        onSubmit={handleReserveGift}
+                        onSubmit={handleRemoveGift}
                     >
                         {({ errors, touched }) => (
                             <>
@@ -76,7 +77,7 @@ const DetalhesGift: React.FC = () => {
                                         touched={touched.quantity}
                                     />
                                 </div>
-                                <Button type="submit">Escolher</Button>
+                                <Button deleteButton type="submit">Remover</Button>
                             </>
                         )}
                     </Form>
@@ -85,4 +86,4 @@ const DetalhesGift: React.FC = () => {
     );
 };
 
-export default DetalhesGift;
+export default RemoveGiftGuest;

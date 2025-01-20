@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import styles from "./Home.module.css";
+import styles from "./Admin.module.css";
 
-import Title from "../../components/common/Title";
-import InfoBox from "../../components/common/InfoBox";
+import InfoBoxAdminView from "../../components/common/InfoBoxAdminView";
 
 import { Gift, getGifts } from "../../services/giftService";
 
 const Home = () => {
     const [gifts, setGifts] = useState<Gift[]>([]);
+    const navigate = useNavigate();
 
     const fetchGifts = async () => {
         try {
@@ -25,15 +26,17 @@ const Home = () => {
 
     return (
         <main className={styles.container}>
-            <Title className={styles.title}>Bem-vinda a minha Lista de Presentes</Title>
             <div className={styles.section}>
                 {gifts.map((gift) => (
-                    <InfoBox
+                    <InfoBoxAdminView
                         key={gift.id}
                         gift={gift}
                     />
                 ))}
             </div>
+            <button className={styles.addButton} onClick={() => navigate("/gifts/cadastrar")}>
+                +
+            </button>
         </main>
     )
 };

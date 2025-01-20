@@ -41,16 +41,16 @@ export const getGiftsByGuestId = async (id: string): Promise<Gift[]> => {
 }
 
 export const updateGift = async (gift: Gift): Promise<Gift> => {
-    const response = await api.put<Gift>(`/gifts/${gift.id}`, gift);
+    const response = await api.put<Gift>(`/gifts/uuid/${gift.id}`, gift);
     return response.data;
 }
 
 export const deleteGift = async (id: string ): Promise<Gift> => {
-    const response = await api.delete<Gift>(`/gifts/${id}`);
+    const response = await api.delete<Gift>(`/gifts/uuid/${id}`);
     return response.data;
 }
 
-export const addGuiftToGuest = async (giftId: string, guestId: string): Promise<Gift> => {
+export const addGiftToGuest = async (giftId: string, guestId: string): Promise<Gift> => {
     const response = await api.post<Gift>(`/gifts/${giftId}/guest/${guestId}`);
     return response.data;
 }

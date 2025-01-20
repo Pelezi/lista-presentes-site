@@ -42,13 +42,18 @@
     font-weight: bold;
     font-size: 1rem;
     margin: 1rem;
-    border: 2px solid #00b81f;
+    border: 2px solid #d50000;
     background: transparent;
-    color: #00b81f;
+    color: #d50000;
     border-radius: 0.2rem;
     transition: background 200ms ease-in, color 200ms ease-in;
     text-align: center;
     text-decoration: none;
+}
+
+.cardBtnB {
+    border: 2px solid rgb(120, 170, 227);
+    color: rgb(120, 170, 227);
 }
 
 @media (max-width: 768px) {
@@ -65,15 +70,5 @@
         padding: 0.5rem;
         margin: 0.5rem;
         font-size: 1rem;
-        border: 1px solid #00b81f;
     }
 }
-/* 
-@media (max-width: 320px) {
-    .cardImage {
-        height: 10rem;
-        width: 100%;
-    }
-
-    
-} */

@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 
-import styles from "./Home.module.css";
+import styles from "./MeusPresentes.module.css";
 
-import Title from "../../components/common/Title";
-import InfoBox from "../../components/common/InfoBox";
+import Title from "../../../components/common/Title";
+import InfoBoxGuestView from "../../../components/common/InfoBoxGuestView";
 
-import { Gift, getGifts } from "../../services/giftService";
+import { Gift, getGiftsByGuestId } from "../../../services/giftService";
+import { useAuth } from "../../../contexts/AuthContext";
 
-const Home = () => {
+const MeusPresentes = () => {
+    const { guest } = useAuth();
     const [gifts, setGifts] = useState<Gift[]>([]);
 
     const fetchGifts = async () => {
         try {
-            const response = await getGifts();
+            const response = await getGiftsByGuestId(guest.id);
             setGifts(response);
         } catch (error) {
             console.log(error);
@@ -25,10 +27,10 @@ const Home = () => {
 
     return (
         <main className={styles.container}>
-            <Title className={styles.title}>Bem-vinda a minha Lista de Presentes</Title>
+            <Title className={styles.title}>Seus Presentes Escolhidos</Title>
             <div className={styles.section}>
                 {gifts.map((gift) => (
-                    <InfoBox
+                    <InfoBoxGuestView
                         key={gift.id}
                         gift={gift}
                     />
@@ -38,4 +40,4 @@ const Home = () => {
     )
 };
 
-export default Home;
+export default MeusPresentes;
