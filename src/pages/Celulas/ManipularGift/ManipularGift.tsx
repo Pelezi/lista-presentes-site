@@ -156,7 +156,6 @@ const ManipularGift: React.FC = () => {
                             <div>
                                 <img alt="Preview" width={"250px"} src={imagePreview} />
                                 <br />
-                                <button onClick={() => setSelectedImage(null)}>Remover</button>
                             </div>
                         )}
                     </fieldset>
