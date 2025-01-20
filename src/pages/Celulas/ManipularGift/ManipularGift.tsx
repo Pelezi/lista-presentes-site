@@ -8,7 +8,7 @@ import Input from "../../../components/forms/Input/Input";
 import Button from "../../../components/common/Button";
 import Title from "../../../components/common/Title";
 import { Gift, createOrUpdateGift } from "../../../services/giftService";
-import style from "./ManipularGift.module.css";
+import styles from "./ManipularGift.module.css";
 
 const ManipularGift: React.FC = () => {
 
@@ -122,7 +122,7 @@ const ManipularGift: React.FC = () => {
                         touched={touched.name}
                     />
                     <Input
-                        label="Foto"
+                        label="PhotoUrl"
                         name="photoUrl"
                         hidden
                         errors={errors.photoUrl}
@@ -142,9 +142,16 @@ const ManipularGift: React.FC = () => {
                         touched={touched.description}
                     />
 
-                    <div>
-                        <label>Selecionar Imagem</label>
-                        <input type="file" onChange={handleImageChange} />
+                    <fieldset className={styles.formGroup}>
+                        <label htmlFor="Foto" className={styles.label}>
+                            Foto:
+                        </label>
+                        <input 
+                        name="Foto"
+                        type="file" 
+                        className={styles.input}
+                        onChange={handleImageChange} 
+                        />
                         {imagePreview && (
                             <div>
                                 <img alt="Preview" width={"250px"} src={imagePreview} />
@@ -152,7 +159,7 @@ const ManipularGift: React.FC = () => {
                                 <button onClick={() => setSelectedImage(null)}>Remover</button>
                             </div>
                         )}
-                    </div>
+                    </fieldset>
 
                     <Button type="submit">Salvar</Button>
                 </>
