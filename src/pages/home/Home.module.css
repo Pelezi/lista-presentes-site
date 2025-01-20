@@ -5,8 +5,12 @@
     flex-wrap: wrap;
 }
 
+.container {
+    width: 100%;
+}
+
 .title {
-    font-size: 30px;
+    font-size: 2rem;
     margin: 0;
     text-align: center;
 }

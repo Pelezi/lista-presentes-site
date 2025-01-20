@@ -79,4 +79,6 @@
 
 .giftImage {
     border-radius: 10px;
+    width: 80vw;
+    max-width: 300px;
 }
