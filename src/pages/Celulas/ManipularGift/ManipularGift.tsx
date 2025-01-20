@@ -8,7 +8,6 @@ import Input from "../../../components/forms/Input/Input";
 import Button from "../../../components/common/Button";
 import Title from "../../../components/common/Title";
 import { Gift, createOrUpdateGift } from "../../../services/giftService";
-import cloudinary from "../../../services/cloudinary";
 import style from "./ManipularGift.module.css";
 
 const ManipularGift: React.FC = () => {
