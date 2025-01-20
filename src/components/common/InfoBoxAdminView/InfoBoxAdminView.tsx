@@ -52,10 +52,10 @@ const InfoBoxAdminView: React.FC<InfoboxProps> = ({ gift }) => {
                 ))
                 }
             </div>
-            {/* <NavLink to={`/gifts/editar/${gift.id}`} className={`${styles.cardBtn} ${styles.cardBtnB}`}>Editar presente</NavLink>
-            <NavLink to={`/Admin/gift/${gift.id}/remove`} className={styles.cardBtn}>Remover presente</NavLink> */}
-            <Button onClick={() => handleEdit(gift)}>Editar presente</Button>
-            <Button deleteButton onClick={() => handleDelete(gift)} >Remover presente</Button>
+            <div>
+                <Button onClick={() => handleEdit(gift)}>Editar presente</Button>
+                <Button deleteButton onClick={() => handleDelete(gift)} >Remover presente</Button>
+            </div>
         </div>
     );
 };
