@@ -18,7 +18,7 @@ const InfoBox: React.FC<InfoboxProps> = ({ gift }) => {
         };
 
         fetchGiftData();
-    }, [gift.id]); 
+    }, [gift.id]);
 
     return (
         <div className={`${styles.card} ${isUnavailable ? styles.unavailable : ''}`}>
@@ -26,9 +26,11 @@ const InfoBox: React.FC<InfoboxProps> = ({ gift }) => {
                 <img src={gift.photoUrl} className={styles.cardImage} alt={gift.name} /> {/* Added fallback for photoUrl */}
                 <h2 className={styles.cardTitle}>{gift.name}</h2>
                 <p className={styles.cardDescription}>{gift.description}</p>
-                <p className={styles.cardQuantity}>Quantidade Disponível: {availableQuantity}/{gift.quantity}</p>
             </div>
-            <NavLink to={`/gift/${gift.id}`} className={styles.cardBtn}>Escolher presente</NavLink>
+            <div className={styles.cardFooter}>
+                <p className={styles.cardQuantity}>Quantidade Disponível: {availableQuantity}/{gift.quantity}</p>
+                <NavLink to={`/gift/${gift.id}`} className={styles.cardBtn}>Escolher presente</NavLink>
+            </div>
         </div>
     );
 };

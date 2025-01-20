@@ -56,6 +56,11 @@
     color: rgb(120, 170, 227);
 }
 
+.cardFooter {
+    display: flex;
+    flex-direction: column;
+}
+
 @media (max-width: 768px) {
 
     .cardTitle {
