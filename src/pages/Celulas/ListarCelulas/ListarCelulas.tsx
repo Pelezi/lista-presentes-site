@@ -40,7 +40,7 @@ const ListarGifts: React.FC = () => {
         try {
             await deleteGift(gift.id);
             fetchGifts();
-            alert("Gift removido com sucesso!");
+            alert("Presente removido com sucesso!");
         } catch (error) {
             console.log("Erro ao remover gift", error);
             alert("Erro ao remover gift. Tente novamente.");

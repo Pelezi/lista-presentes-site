@@ -39,7 +39,7 @@ const InfoBoxAdminView: React.FC<InfoboxProps> = ({ gift, fetchGifts }) => {
         try {
             await deleteGift(gift.id);
             if (fetchGifts) fetchGifts(); // Ensure fetchGifts is called after deletion
-            alert("Gift removido com sucesso!");
+            alert("Presente removido com sucesso!");
         } catch (error) {
             console.log("Erro ao remover gift", error);
             alert("Erro ao remover gift. Tente novamente.");

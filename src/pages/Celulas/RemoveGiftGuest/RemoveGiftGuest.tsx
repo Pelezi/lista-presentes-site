@@ -46,11 +46,11 @@ const RemoveGiftGuest: React.FC = () => {
             for (let i = 0; i < values.quantity; i++) {
                 await removeGiftFromGuest(gift.id, guest.id);
             }
-            alert("Presente reservado com sucesso!");
+            alert("Presente escolhido com sucesso!");
             fetchGift();
         } catch (error) {
-            console.log("Erro ao reservar presente", error);
-            alert("Erro ao reservar presente. Tente novamente.");
+            console.log("Erro ao escolher presente", error);
+            alert("Erro ao escolher presente. Tente novamente.");
         }
     };
 
