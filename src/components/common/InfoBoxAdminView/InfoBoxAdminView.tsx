@@ -7,9 +7,10 @@ import Button from "../Button";
 
 interface InfoboxProps {
     gift: Gift;
+    fetchGifts?: () => void;
 }
 
-const InfoBoxAdminView: React.FC<InfoboxProps> = ({ gift }) => {
+const InfoBoxAdminView: React.FC<InfoboxProps> = ({ gift, fetchGifts }) => {
     const navigate = useNavigate();
     const [availableQuantity, setAvailableQuantity] = useState(0);
     const [giftInfo, setGiftInfo] = useState<Gift>();
@@ -29,14 +30,19 @@ const InfoBoxAdminView: React.FC<InfoboxProps> = ({ gift }) => {
     }
 
     const handleDelete = async (gift: Gift) => {
+        if (gift.count && gift.count > 0) {
+            const confirmDelete = window.confirm("Este presente tem convidados associados. Tem certeza de que deseja removê-lo?");
+            if (!confirmDelete) {
+                return;
+            }
+        }
         try {
             await deleteGift(gift.id);
-            fetchGiftData();
-            alert("Gift removida com sucesso!");
+            if (fetchGifts) fetchGifts(); // Ensure fetchGifts is called after deletion
+            alert("Gift removido com sucesso!");
         } catch (error) {
             console.log("Erro ao remover gift", error);
             alert("Erro ao remover gift. Tente novamente.");
-
         }
     }
 

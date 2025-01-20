@@ -31,6 +31,7 @@ const Home = () => {
                     <InfoBoxAdminView
                         key={gift.id}
                         gift={gift}
+                        fetchGifts={fetchGifts}
                     />
                 ))}
             </div>

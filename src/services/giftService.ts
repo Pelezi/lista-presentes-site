@@ -3,7 +3,7 @@ import api from './api';
 export interface Gift {
     id: string;
     name: string;
-    photoUrl: string;
+    photoUrl?: string;
     quantity: number;
     description: string;
     guests?: Array<
