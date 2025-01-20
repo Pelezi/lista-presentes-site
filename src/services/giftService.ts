@@ -21,7 +21,9 @@ export interface Gift {
 }
 
 export const createGift = async (gift: Gift): Promise<Gift> => {
-    const response = await api.post<Gift>('/gifts', gift);
+    // Ensure id is removed from gift object
+    const { id, ...giftWithoutId } = gift;
+    const response = await api.post<Gift>('/gifts', giftWithoutId);
     return response.data;
 }
 
@@ -61,7 +63,7 @@ export const removeGiftFromGuest = async (giftId: string, guestId: string): Prom
 }
 
 export const createOrUpdateGift = async (gift: Gift): Promise<Gift> => {
-    if (!gift.id) {
+    if (!gift.id || gift.id === '') {
         return await createGift(gift);
     } else {
         return await updateGift(gift);
