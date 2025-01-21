@@ -12,11 +12,13 @@ import styles from "./ManipularGift.module.css";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../../../utils/cropImage";
 import Textarea from "../../../components/forms/Textarea";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const ManipularGift: React.FC = () => {
 
     const navigate = useNavigate();
     const gift = useLocation().state as Gift;
+    const { guest } = useAuth();
 
     const initialValues: Gift = {
         id: "",
@@ -114,7 +116,7 @@ const ManipularGift: React.FC = () => {
             } else {
                 delete filteredValues.photoUrl;
             }
-            await createOrUpdateGift(filteredValues);
+            await createOrUpdateGift(filteredValues, guest.id);
             resetForm();
             navigate("/admin");
             alert("Presente salvo com sucesso!");

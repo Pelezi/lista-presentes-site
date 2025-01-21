@@ -20,10 +20,10 @@ export interface Gift {
     count?: number;
 }
 
-export const createGift = async (gift: Gift): Promise<Gift> => {
+export const createGift = async (gift: Gift, guestId?: string): Promise<Gift> => {
     // Ensure id is removed from gift object
     const { id, ...giftWithoutId } = gift;
-    const response = await api.post<Gift>('/gifts', giftWithoutId);
+    const response = await api.post<Gift>(`/gifts${guestId ? `?guestId=${guestId}` : ''}`, giftWithoutId);
     return response.data;
 }
 
@@ -42,13 +42,13 @@ export const getGiftsByGuestId = async (id: string): Promise<Gift[]> => {
     return response.data;
 }
 
-export const updateGift = async (gift: Gift): Promise<Gift> => {
-    const response = await api.put<Gift>(`/gifts/uuid/${gift.id}`, gift);
+export const updateGift = async (gift: Gift, guestId?: string): Promise<Gift> => {
+    const response = await api.put<Gift>(`/gifts/uuid/${gift.id}${guestId ? `?guestId=${guestId}` : ''}`, gift);
     return response.data;
 }
 
-export const deleteGift = async (id: string ): Promise<Gift> => {
-    const response = await api.delete<Gift>(`/gifts/uuid/${id}`);
+export const deleteGift = async (id: string, guestId?: string ): Promise<Gift> => {
+    const response = await api.delete<Gift>(`/gifts/uuid/${id}${guestId ? `?guestId=${guestId}` : ''}`);
     return response.data;
 }
 
@@ -62,10 +62,10 @@ export const removeGiftFromGuest = async (giftId: string, guestId: string): Prom
     return response.data;
 }
 
-export const createOrUpdateGift = async (gift: Gift): Promise<Gift> => {
+export const createOrUpdateGift = async (gift: Gift, guestId?: string): Promise<Gift> => {
     if (!gift.id || gift.id === '') {
-        return await createGift(gift);
+        return await createGift(gift, guestId);
     } else {
-        return await updateGift(gift);
+        return await updateGift(gift, guestId);
     }
 }

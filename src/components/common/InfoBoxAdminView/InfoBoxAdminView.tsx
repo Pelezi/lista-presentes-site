@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Gift, deleteGift, getGiftsById } from "../../../services/giftService";
 
 import Button from "../Button";
+import { useAuth } from "../../../contexts/AuthContext";
 
 interface InfoboxProps {
     gift: Gift;
@@ -12,6 +13,8 @@ interface InfoboxProps {
 
 const InfoBoxAdminView: React.FC<InfoboxProps> = ({ gift, fetchGifts }) => {
     const navigate = useNavigate();
+    const { guest } = useAuth();
+    
     const [availableQuantity, setAvailableQuantity] = useState(0);
     const [giftInfo, setGiftInfo] = useState<Gift>();
 
@@ -37,8 +40,8 @@ const InfoBoxAdminView: React.FC<InfoboxProps> = ({ gift, fetchGifts }) => {
             }
         }
         try {
-            await deleteGift(gift.id);
-            if (fetchGifts) fetchGifts(); // Ensure fetchGifts is called after deletion
+            await deleteGift(gift.id, guest?.id);
+            if (fetchGifts) fetchGifts(); 
             alert("Presente removido com sucesso!");
         } catch (error) {
             console.log("Erro ao remover gift", error);
