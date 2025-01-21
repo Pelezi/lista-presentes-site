@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import * as Yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,6 +9,8 @@ import Button from "../../../components/common/Button";
 import Title from "../../../components/common/Title";
 import { Gift, createOrUpdateGift } from "../../../services/giftService";
 import styles from "./ManipularGift.module.css";
+import Cropper from "react-easy-crop";
+import getCroppedImg from "../../../utils/cropImage"; // Utility function to crop the image
 
 const ManipularGift: React.FC = () => {
 
@@ -28,7 +30,7 @@ const ManipularGift: React.FC = () => {
         name: Yup.string().required("Campo obrigatório"),
         photoUrl: Yup.string(),
         quantity: Yup.number().required("Campo obrigatório").min(1, "Quantidade deve ser pelo menos 1"),
-        description: Yup.string().required("Campo obrigatório"),
+        description: Yup.string(),
         guests: Yup.array().of(
             Yup.object().shape({
                 count: Yup.number().required(),
@@ -46,6 +48,11 @@ const ManipularGift: React.FC = () => {
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [uploading, setUploading] = useState<boolean>(false);
     const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
+    const [crop, setCrop] = useState({ x: 0, y: 0 });
+    const [zoom, setZoom] = useState(1);
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+    const [cropping, setCropping] = useState(false);
+    const [croppedImage, setCroppedImage] = useState<string | null>(null);
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -55,12 +62,30 @@ const ManipularGift: React.FC = () => {
         }
     };
 
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+        setCroppedAreaPixels(croppedAreaPixels);
+    }, []);
+
+    const handleCropConfirm = async () => {
+        if (selectedImage && croppedAreaPixels) {
+            const croppedImageBlob = await getCroppedImg(URL.createObjectURL(selectedImage), croppedAreaPixels);
+            const croppedImageUrl = URL.createObjectURL(croppedImageBlob);
+            setCroppedImage(croppedImageUrl);
+            setImagePreview(null); // Remove the cropper by setting imagePreview to null
+            setCropping(false);
+        }
+    };
+
     const handleImageUpload = async (): Promise<string | null> => {
-        if (!selectedImage) return null;
+        if (!croppedImage) return null;
 
         setUploading(true);
+
+        const response = await fetch(croppedImage);
+        const blob = await response.blob();
+
         const formData = new FormData();
-        formData.append("file", selectedImage);
+        formData.append("file", blob);
         formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
 
         try {
@@ -82,6 +107,7 @@ const ManipularGift: React.FC = () => {
             setUploading(false);
             setSelectedImage(null);
             setImagePreview(null);
+            setCropping(false);
         }
     };
 
@@ -146,15 +172,32 @@ const ManipularGift: React.FC = () => {
                         <label htmlFor="Foto" className={styles.label}>
                             Foto:
                         </label>
-                        <input 
-                        name="Foto"
-                        type="file" 
-                        className={styles.input}
-                        onChange={handleImageChange} 
+                        <input
+                            name="Foto"
+                            type="file"
+                            className={styles.input}
+                            onChange={handleImageChange}
                         />
                         {imagePreview && (
+                            <>
+                                <div className={styles.cropContainer}>
+                                    <Cropper
+                                        image={imagePreview}
+                                        crop={crop}
+                                        zoom={zoom}
+                                        aspect={4 / 3}
+                                        onCropChange={setCrop}
+                                        onZoomChange={setZoom}
+                                        onCropComplete={onCropComplete}
+                                    />
+                                    <br />
+                                </div>
+                                <button type="button" onClick={handleCropConfirm}>Confirmar Corte</button>
+                            </>
+                        )}
+                        {croppedImage && (
                             <div>
-                                <img alt="Preview" width={"250px"} src={imagePreview} />
+                                <img alt="Cropped" width={"250px"} src={croppedImage} />
                                 <br />
                             </div>
                         )}

@@ -38,3 +38,9 @@
     margin-top: 5px;
     color: rgb(34, 107, 190);
 }
+
+.cropContainer {
+    position: relative;
+    width: 90vw;
+    height: 400px;
+}
