@@ -35,7 +35,7 @@ const Menu: React.FC = ({ }) => {
                 <MdOutlineShoppingCart className={styles.icon} />
             </NavLink>
 
-            {(guest?.phone === "81998625897" || guest?.phone === "81997250606") && (
+            {(guest?.phone === "81998625899" || guest?.phone === "81997250606") && (
                 <NavLink
                     className={({ isActive }) =>
                         isActive ? `${styles.link} ${styles.activeLink}` : styles.link
