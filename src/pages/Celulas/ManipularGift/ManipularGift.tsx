@@ -192,7 +192,7 @@ const ManipularGift: React.FC = () => {
                                     />
                                     <br />
                                 </div>
-                                <button type="button" onClick={handleCropConfirm}>Confirmar Corte</button>
+                                <Button green onClick={handleCropConfirm}>Confirmar Corte</Button>
                             </>
                         )}
                         {croppedImage && (

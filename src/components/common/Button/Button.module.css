@@ -27,14 +27,11 @@
 }
 
 .greenButton {
-    color: #33cc33;
-    background-color: transparent;
-    padding: 0;
+    background-color: #33cc33;
 }
 
 .greenButton:hover {
-    color: #1f9d1f;
-    background-color: transparent;
+    background-color: #229622;
 }
 
 .blueButton {
