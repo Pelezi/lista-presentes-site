@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./InfoBoxAdminView.module.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Gift, deleteGift, getGiftsById } from "../../../services/giftService";
 
 import Button from "../Button";

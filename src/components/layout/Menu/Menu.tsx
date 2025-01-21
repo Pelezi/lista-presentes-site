@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { NavLink } from "react-router-dom";
 
-import styles from "./Sidebar.module.css";
+import styles from "./Menu.module.css";
 
 import { useAuth } from "../../../contexts/AuthContext";
 import { FaGift, FaGears } from "react-icons/fa6";
 import { MdOutlineShoppingCart, MdLogout } from "react-icons/md";
 
 
-const Sidebar: React.FC = ({ }) => {
+const Menu: React.FC = ({ }) => {
 
     const { logout, guest } = useAuth();
 
@@ -60,4 +60,4 @@ const Sidebar: React.FC = ({ }) => {
     );
 };
 
-export default Sidebar;
+export default Menu;

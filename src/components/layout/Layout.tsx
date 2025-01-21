@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import buqueLeft from "../../Assets/img/floral-header-left.png";
 import buqueRight from "../../Assets/img/floral-header-right.png";
 
-import Sidebar from "./Sidebar";
+import Menu from "./Menu";
 
 import styles from "./Layout.module.css";
 
@@ -21,8 +21,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <div className={styles.content}>
                     {children}
                 </div>
-                <div className={styles.sidebar}>
-                    <Sidebar />
+                <div className={styles.menu}>
+                    <Menu />
                 </div>
             </div>
         </div>
