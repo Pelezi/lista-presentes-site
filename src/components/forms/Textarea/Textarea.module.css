@@ -4,6 +4,8 @@
     resize: vertical;
     border-radius: 5px;
     border: none;
-    background-color: #ffffff;
+    background-color: #ecf2f7;
     margin-top: 5px;
+    color: rgb(34, 107, 190);
+    border: none;
 }

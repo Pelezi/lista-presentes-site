@@ -11,6 +11,7 @@ import { Gift, createOrUpdateGift } from "../../../services/giftService";
 import styles from "./ManipularGift.module.css";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../../../utils/cropImage"; // Utility function to crop the image
+import Textarea from "../../../components/forms/Textarea";
 
 const ManipularGift: React.FC = () => {
 
@@ -153,7 +154,7 @@ const ManipularGift: React.FC = () => {
                         errors={errors.quantity}
                         touched={touched.quantity}
                     />
-                    <Input
+                    <Textarea
                         label="Descrição"
                         name="description"
                         errors={errors.description}
