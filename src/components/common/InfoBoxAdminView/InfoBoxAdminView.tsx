@@ -54,7 +54,7 @@ const InfoBoxAdminView: React.FC<InfoboxProps> = ({ gift, fetchGifts }) => {
                 <p className={styles.cardDescription}>{gift.description}</p>
                 <p className={styles.cardQuantity}>Quantidade Disponível: {availableQuantity}/{gift.quantity}</p>
                 {giftInfo?.guests?.map((guest) => (
-                    <p className={styles.cardDescription} key={guest.guest.id}>{guest.guest.name} - {guest.count}</p>
+                    <p className={styles.cardDescription} key={guest.guest.id}>{guest.guest.name}: {guest.count}</p>
                 ))
                 }
             </div>
