@@ -5,7 +5,7 @@
 }
 
 .navigation {
-    background-color: #a5d6bb;
+    background-color: #c2b2e6;
     height: 100%;
     text-align: center;
 }
@@ -51,13 +51,13 @@
     transition: all 0.3s ease;
     justify-items: center;
     align-content: center;
-    color: rgb(34, 107, 190);
+    color: #7009a0;
 }
 
 /* --- Begin src\components\layout\Menu\Menu.module.css --- */
 
 .navigation  .link.activeLink {
-    background-color: #8dceaa;  /* Active background color */
+    background-color: #D6CDEA;  /* Active background color */
 }
 
 /* Add the rest of your styles as necessary */
