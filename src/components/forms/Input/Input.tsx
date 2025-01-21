@@ -1,6 +1,5 @@
 import React from "react";
-
-import { Field, ErrorMessage } from "formik";
+import { Field, ErrorMessage, useFormikContext } from "formik";
 import InputMask from "react-input-mask";
 
 import styles from "./Input.module.css";
@@ -22,6 +21,7 @@ export interface InputProps {
 };
 
 const Input: React.FC<InputProps> = ({ label, name, type = "text", as, errors, touched, children, className, hidden, readonly, hiddenLabel, placeholder, phone }) => {
+    const { isSubmitting } = useFormikContext();
 
     return (
         <fieldset className={`${styles.formGroup} ${hidden && styles.hidden}`}>
@@ -33,9 +33,10 @@ const Input: React.FC<InputProps> = ({ label, name, type = "text", as, errors, t
                 type={type}
                 as={phone ? InputMask : as ? as : undefined}
                 mask={phone ? "(99) 9 9999-9999" : undefined}
-                readOnly={readonly}
+                readOnly={readonly || isSubmitting}
                 className={`${className ? className : styles.input} ${touched && errors && styles.error}`}
                 placeholder={placeholder}
+                disabled={isSubmitting}
             >
                 {children}
             </Field>

@@ -54,34 +54,34 @@ const DetalhesGift: React.FC = () => {
     };
 
     return (
-            <div className={styles.section}>
-                <h1>{gift.name}</h1>
-                <img src={gift.photoUrl} alt={gift.name} className={styles.giftImage} />
-                <p>{gift.description}</p>
-                <p>Quantidade disponível: {availableQuantity}/{gift.quantity}</p>
-                <div className={styles.reserveSection}>
-                    <Form
-                        initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        onSubmit={handleReserveGift}
-                    >
-                        {({ errors, touched }) => (
-                            <>
-                                <div className={styles.inputBox}>
-                                    <Input
-                                        label="Quantidade"
-                                        name="quantity"
-                                        type="number"
-                                        errors={errors.quantity}
-                                        touched={touched.quantity}
-                                    />
-                                </div>
-                                <Button type="submit">Escolher</Button>
-                            </>
-                        )}
-                    </Form>
-                </div>
+        <div className={styles.section}>
+            <div className={styles.reserveSection}>
+                <Form
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={handleReserveGift}
+                >
+                    {({ errors, touched }) => (
+                        <>
+                            <h1>{gift.name}</h1>
+                            <img src={gift.photoUrl} alt={gift.name} className={styles.giftImage} />
+                            <p>{gift.description}</p>
+                            <p>Quantidade disponível: {availableQuantity}/{gift.quantity}</p>
+                            <div className={styles.inputBox}>
+                                <Input
+                                    label="Quantidade"
+                                    name="quantity"
+                                    type="number"
+                                    errors={errors.quantity}
+                                    touched={touched.quantity}
+                                />
+                            </div>
+                            <Button type="submit">Escolher</Button>
+                        </>
+                    )}
+                </Form>
             </div>
+        </div >
     );
 };
 

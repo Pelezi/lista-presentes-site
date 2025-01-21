@@ -18,7 +18,7 @@ const RemoveGiftGuest: React.FC = () => {
         try {
             const gift = await getGiftsById(String(id));
             setGift(gift);
-            
+
             const userCount = gift.guests?.find(g => g.guest.id === guest.id)?.count || 0;
             setChosenQuantity(userCount);
         } catch (error) {
@@ -55,34 +55,34 @@ const RemoveGiftGuest: React.FC = () => {
     };
 
     return (
-            <div className={styles.section}>
-                <h1>{gift.name}</h1>
-                <img src={gift.photoUrl} alt={gift.name} className={styles.giftImage} />
-                <p>{gift.description}</p>
-                <p>Quantidade escolhida: {chosenQuantity}/{gift.quantity}</p>
-                <div className={styles.reserveSection}>
-                    <Form
-                        initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        onSubmit={handleRemoveGift}
-                    >
-                        {({ errors, touched }) => (
-                            <>
-                                <div className={styles.inputBox}>
-                                    <Input
-                                        label="Quantidade"
-                                        name="quantity"
-                                        type="number"
-                                        errors={errors.quantity}
-                                        touched={touched.quantity}
-                                    />
-                                </div>
-                                <Button deleteButton type="submit">Remover</Button>
-                            </>
-                        )}
-                    </Form>
-                </div>
+        <div className={styles.section}>
+            <div className={styles.reserveSection}>
+                <Form
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={handleRemoveGift}
+                >
+                    {({ errors, touched }) => (
+                        <>
+                            <h1>{gift.name}</h1>
+                            <img src={gift.photoUrl} alt={gift.name} className={styles.giftImage} />
+                            <p>{gift.description}</p>
+                            <p>Quantidade escolhida: {chosenQuantity}/{gift.quantity}</p>
+                            <div className={styles.inputBox}>
+                                <Input
+                                    label="Quantidade"
+                                    name="quantity"
+                                    type="number"
+                                    errors={errors.quantity}
+                                    touched={touched.quantity}
+                                />
+                            </div>
+                            <Button deleteButton type="submit">Remover</Button>
+                        </>
+                    )}
+                </Form>
             </div>
+        </div>
     );
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Formik, FormikHelpers, FormikProps, FormikValues, Form as FormikForm } from "formik";
 import * as Yup from "yup";
@@ -14,19 +14,29 @@ interface FormProps<T> {
 }
 
 const Form = <T extends FormikValues>({ initialValues, validationSchema, onSubmit, children }: FormProps<T>) => {
+    const [submitting, setSubmitting] = useState(false);
+
+    const handleSubmit = async (values: T, formikHelpers: FormikHelpers<T>) => {
+        setSubmitting(true);
+        await onSubmit(values, formikHelpers);
+        setSubmitting(false);
+    };
+
     return (
         <div className={styles.formWrapper}>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 enableReinitialize={true}
-                onSubmit={onSubmit}
+                onSubmit={handleSubmit}
             >
                 {(formikProps) => (
-                    <FormikForm 
-                    >
-                        {children(formikProps)}
-                    </FormikForm>
+                    <>
+                        <FormikForm className={submitting ? styles.submitting : ""}>
+                            {children(formikProps)}
+                        </FormikForm>
+                        {submitting && <div className={styles.loading}>Carregando...</div>}
+                    </>
                 )}
             </Formik>
         </div>

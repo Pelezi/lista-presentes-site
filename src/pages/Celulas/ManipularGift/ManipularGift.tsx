@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 
 import * as Yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -46,12 +46,9 @@ const ManipularGift: React.FC = () => {
 
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
-    const [uploading, setUploading] = useState<boolean>(false);
-    const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-    const [cropping, setCropping] = useState(false);
     const [croppedImage, setCroppedImage] = useState<string | null>(null);
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,14 +69,11 @@ const ManipularGift: React.FC = () => {
             const croppedImageUrl = URL.createObjectURL(croppedImageBlob);
             setCroppedImage(croppedImageUrl);
             setImagePreview(null); // Remove the cropper by setting imagePreview to null
-            setCropping(false);
         }
     };
 
     const handleImageUpload = async (): Promise<string | null> => {
         if (!croppedImage) return null;
-
-        setUploading(true);
 
         const response = await fetch(croppedImage);
         const blob = await response.blob();
@@ -104,10 +98,8 @@ const ManipularGift: React.FC = () => {
             alert("Erro ao enviar imagem. Tente novamente.");
             return null;
         } finally {
-            setUploading(false);
             setSelectedImage(null);
             setImagePreview(null);
-            setCropping(false);
         }
     };
 
