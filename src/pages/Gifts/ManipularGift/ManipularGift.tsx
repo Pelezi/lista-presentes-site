@@ -10,7 +10,7 @@ import Title from "../../../components/common/Title";
 import { Gift, createOrUpdateGift } from "../../../services/giftService";
 import styles from "./ManipularGift.module.css";
 import Cropper from "react-easy-crop";
-import getCroppedImg from "../../../utils/cropImage"; 
+import getCroppedImg from "../../../utils/cropImage";
 import Textarea from "../../../components/forms/Textarea";
 
 const ManipularGift: React.FC = () => {

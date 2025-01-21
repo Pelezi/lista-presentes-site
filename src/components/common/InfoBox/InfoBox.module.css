@@ -9,6 +9,7 @@
     margin: 1rem;
     width: 100%;
     max-width: 300px;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .unavailable {
@@ -73,12 +74,3 @@
         border: 1px solid #00b81f;
     }
 }
-/* 
-@media (max-width: 320px) {
-    .cardImage {
-        height: 10rem;
-        width: 100%;
-    }
-
-    
-} */
