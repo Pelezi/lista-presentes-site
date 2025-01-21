@@ -9,12 +9,11 @@ import { useAuth } from "../contexts/AuthContext";
 import Home from '../pages/home';
 import Admin from '../pages/Admin';
 
-import MeusPresentes from '../pages/pessoas/MeusPresentes';
+import MeusPresentes from '../pages/guests/MeusPresentes';
 
-import DetalhesCelula from "../pages/Celulas/DetalhesCelulaAdmin";
-import DetalhesGiftGuest from "../pages/Celulas/DetalhesGiftGuest";
-import RemoveGiftGuest from "../pages/Celulas/RemoveGiftGuest";
-import ManipularGift from "../pages/Celulas/ManipularGift";
+import DetalhesGiftGuest from "../pages/Gifts/DetalhesGiftGuest";
+import RemoveGiftGuest from "../pages/Gifts/RemoveGiftGuest";
+import ManipularGift from "../pages/Gifts/ManipularGift";
 
 const AuthRoutes: React.FC = () => {
     const { authenticated, isLoading } = useAuth();
@@ -33,7 +32,6 @@ const AuthRoutes: React.FC = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
 
-                <Route path="/gift/:id/admin" element={<DetalhesCelula />} />
                 <Route path="/gift/:id" element={<DetalhesGiftGuest />} />
                 <Route path="/gift/:id/remove" element={<RemoveGiftGuest />} />
                 <Route path="/gifts/cadastrar" element={<ManipularGift />} />

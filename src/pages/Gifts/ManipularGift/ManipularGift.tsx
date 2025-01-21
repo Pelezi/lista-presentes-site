@@ -10,7 +10,7 @@ import Title from "../../../components/common/Title";
 import { Gift, createOrUpdateGift } from "../../../services/giftService";
 import styles from "./ManipularGift.module.css";
 import Cropper from "react-easy-crop";
-import getCroppedImg from "../../../utils/cropImage"; // Utility function to crop the image
+import getCroppedImg from "../../../utils/cropImage"; 
 import Textarea from "../../../components/forms/Textarea";
 
 const ManipularGift: React.FC = () => {
@@ -69,7 +69,7 @@ const ManipularGift: React.FC = () => {
             const croppedImageBlob = await getCroppedImg(URL.createObjectURL(selectedImage), croppedAreaPixels);
             const croppedImageUrl = URL.createObjectURL(croppedImageBlob);
             setCroppedImage(croppedImageUrl);
-            setImagePreview(null); // Remove the cropper by setting imagePreview to null
+            setImagePreview(null);
         }
     };
 
