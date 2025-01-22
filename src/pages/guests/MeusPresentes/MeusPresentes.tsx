@@ -5,12 +5,14 @@ import styles from "./MeusPresentes.module.css";
 import Title from "../../../components/common/Title";
 import InfoBoxGuestView from "../../../components/common/InfoBoxGuestView";
 
-import { Gift, getGiftsByGuestId } from "../../../services/giftService";
+import { Gift, getGiftsByGuestId, sendTelegramMessage } from "../../../services/giftService";
 import { useAuth } from "../../../contexts/AuthContext";
+
 
 const MeusPresentes = () => {
     const { guest } = useAuth();
     const [gifts, setGifts] = useState<Gift[]>([]);
+
 
     const fetchGifts = async () => {
         try {
@@ -21,9 +23,11 @@ const MeusPresentes = () => {
         }
     }
 
+
     useEffect(() => {
         fetchGifts();
     }, []);
+
 
     return (
         <main className={styles.container}>

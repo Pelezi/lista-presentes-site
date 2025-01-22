@@ -14,3 +14,26 @@
     margin: 0;
     text-align: center;
 }
+
+.bioButton {
+    position: fixed;
+    bottom: 8vh;
+    right: -60px;
+    rotate: -15deg;
+    width: 50px;
+    color: white;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.bioButtonVisible {
+    right: -50px;
+    transition: 0.3s;
+}
+
+.bioButton:hover {
+    right: -20px;
+    transition: 0.3s;
+}

@@ -6,12 +6,14 @@ import buqueRight from "../../Assets/img/floral-header-right.png";
 import Menu from "./Menu";
 
 import styles from "./Layout.module.css";
+import { useNavigate } from "react-router-dom";
 
 interface LayoutProps {
     children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+    const navigate = useNavigate();
 
     return (
         <div className={styles.container}>

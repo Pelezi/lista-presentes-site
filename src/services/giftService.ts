@@ -69,3 +69,7 @@ export const createOrUpdateGift = async (gift: Gift, guestId?: string): Promise<
         return await updateGift(gift, guestId);
     }
 }
+
+export const sendTelegramMessage = async (type: string, guest: string): Promise<void> => {
+    await api.post(`/gifts/telegram/?type=${type}&guest=${guest}`);
+}

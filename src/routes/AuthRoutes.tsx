@@ -15,6 +15,8 @@ import DetalhesGiftGuest from "../pages/Gifts/DetalhesGiftGuest";
 import RemoveGiftGuest from "../pages/Gifts/RemoveGiftGuest";
 import ManipularGift from "../pages/Gifts/ManipularGift";
 
+import Bio from "../pages/Bio";
+
 const AuthRoutes: React.FC = () => {
     const { authenticated, isLoading } = useAuth();
 
@@ -39,6 +41,8 @@ const AuthRoutes: React.FC = () => {
                 <Route path="/meus-presentes" element={<MeusPresentes />} />
 
                 <Route path="/admin" element={<Admin />} />
+
+                <Route path="/bio" element={<Bio />} />
 
             </Routes>
         </Layout>
