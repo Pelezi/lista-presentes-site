@@ -5,11 +5,22 @@ import SocialMedia from "../../components/common/SocialMedia";
 import { sendTelegramMessage } from "../../services/giftService";
 import { useAuth } from "../../contexts/AuthContext";
 
+import nggyu from "../../Assets/audio/Rick Astley - Never Gonna Give You Up.mp3"
+import rickroll from "../../Assets/img/rickroll.gif"
+import Button from "../../components/common/Button";
+
 const Bio = () => {
-    const [countdown, setCountdown] = useState(5);
+    const [countdown, setCountdown] = useState(60);
+    const [showRickroll, setShowRickroll] = useState(false);
     const hasOpenedUrl = useRef(false);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const audioRef = useRef<HTMLAudioElement>(null);
 
     const { guest } = useAuth();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const socialMediaData = [
         {
@@ -57,7 +68,8 @@ const Bio = () => {
                         clearInterval(timer);
                         hasOpenedUrl.current = true;
                         sendTelegramMessage("rickroll", guest.name);
-                        window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+                        setShowRickroll(true);
+                        setIsPlaying(true);
                     } catch (error) {
                         console.log(error);
                     }
@@ -69,13 +81,35 @@ const Bio = () => {
         return () => clearInterval(timer);
     }, []);
 
+    const toggleMusic = () => {
+        if (audioRef.current) {
+            if (isPlaying) {
+                audioRef.current.pause();
+            } else {
+                audioRef.current.play();
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
+
     return (
         <div className={styles.container}>
             <p>Parabéns, você encontrou o meu segredo!</p>
             <p>Aguarde a contagem regressiva para uma surpresa incrível.</p>
-            <main className={styles.container}>
-                <p className={styles.countdown}>{countdown}</p>
-            </main>
+            {showRickroll ? (
+                <div>
+                    <img src={rickroll} className={styles.rickrollGif} alt="Rickroll GIF" />
+                    <audio ref={audioRef} src={nggyu} autoPlay />
+                    <Button onClick={toggleMusic}>
+                        {isPlaying ? "Parar música" : "Tocar música"}
+                    </Button>
+                </div>
+            ) :
+                (
+                    <main className={styles.container}>
+                        <p className={styles.countdown}>{countdown}</p>
+                    </main>
+                )}
             Site feito por Alessandro Cardoso
             {socialMediaData.map((social, index) => (
                 <SocialMedia
@@ -86,7 +120,6 @@ const Bio = () => {
                     image={social.image}
                 />
             ))}
-
         </div>
     )
 };
