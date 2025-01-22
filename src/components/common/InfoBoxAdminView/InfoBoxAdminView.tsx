@@ -34,7 +34,12 @@ const InfoBoxAdminView: React.FC<InfoboxProps> = ({ gift, fetchGifts }) => {
 
     const handleDelete = async (gift: Gift) => {
         if (gift.count && gift.count > 0) {
-            const confirmDelete = window.confirm("Este presente tem convidados associados. Tem certeza de que deseja removê-lo?");
+            const confirmDelete = window.confirm("Este presente tem convidados associados. Tem certeza de que deseja apagar?");
+            if (!confirmDelete) {
+                return;
+            }
+        } else {
+            const confirmDelete = window.confirm("Tem certeza de que deseja apagar este presente?");
             if (!confirmDelete) {
                 return;
             }
