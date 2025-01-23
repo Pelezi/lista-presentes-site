@@ -20,6 +20,13 @@ const ManipularGift: React.FC = () => {
     const gift = useLocation().state as Gift;
     const { guest } = useAuth();
 
+    type Area = {
+        width: number;
+        height: number;
+        x: number;
+        y: number;
+    };
+
     const initialValues: Gift = {
         id: "",
         name: "",
@@ -51,7 +58,7 @@ const ManipularGift: React.FC = () => {
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
-    const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
     const [croppedImage, setCroppedImage] = useState<string | null>(null);
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +69,7 @@ const ManipularGift: React.FC = () => {
         }
     };
 
-    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    const onCropComplete = useCallback((croppedAreaPixels: Area) => {
         setCroppedAreaPixels(croppedAreaPixels);
     }, []);
 

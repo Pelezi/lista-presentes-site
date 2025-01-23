@@ -8,6 +8,8 @@ import Menu from "./Menu";
 import styles from "./Layout.module.css";
 import { useNavigate } from "react-router-dom";
 
+import { Analytics } from "@vercel/analytics/react"
+
 interface LayoutProps {
     children: React.ReactNode;
 }
@@ -22,7 +24,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <img className={`${styles.buque} ${styles.buquer}`} src={buqueRight} alt="" />
                 <div className={styles.content}>
                     {children}
-                    {/* <Analytics/> */}
+                    <Analytics/>
                 </div>
                 <div className={styles.menu}>
                     <Menu />

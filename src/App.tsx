@@ -6,8 +6,6 @@ import Login from './pages/Login';
 import AuthRoutes from './routes/AuthRoutes';
 import { AuthProvider } from './contexts/AuthContext';
 
-
-
 const App: React.FC = () => {
   return (
     <AuthProvider>
