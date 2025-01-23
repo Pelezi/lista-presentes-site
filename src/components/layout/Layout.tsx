@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import buqueLeft from "../../Assets/img/floral-header-left.png";
 import buqueRight from "../../Assets/img/floral-header-right.png";
@@ -22,6 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <img className={`${styles.buque} ${styles.buquer}`} src={buqueRight} alt="" />
                 <div className={styles.content}>
                     {children}
+                    {/* <Analytics/> */}
                 </div>
                 <div className={styles.menu}>
                     <Menu />

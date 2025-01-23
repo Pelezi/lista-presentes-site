@@ -54,6 +54,11 @@ const Home = () => {
     return (
         <main className={styles.container}>
             <Title className={styles.title}>Bem-vinda a minha Lista de Presentes</Title>
+            <p className={styles.infoText}>
+                As imagens são apenas ilustrativas, então não se preocupe em encontrar exatamente o que está na foto.
+                <br />
+                E lembre-se, o presente não é obrigatório, a sua presença é mais importante que qualquer presente!
+            </p>
             <div className={styles.section}>
                 {gifts.map((gift) => (
                     <InfoBox
