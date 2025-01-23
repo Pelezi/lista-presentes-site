@@ -9,6 +9,8 @@ import * as Yup from "yup";
 import Form from "../../../components/forms/Form";
 
 const RemoveGiftGuest: React.FC = () => {
+    const navigate = useNavigate();
+    
     const { id } = useParams();
     const { guest } = useAuth();
     const [gift, setGift] = useState<Gift>({} as Gift);
@@ -46,11 +48,12 @@ const RemoveGiftGuest: React.FC = () => {
             for (let i = 0; i < values.quantity; i++) {
                 await removeGiftFromGuest(gift.id, guest.id);
             }
-            alert("Presente escolhido com sucesso!");
+            alert("Presente removido com sucesso!");
             fetchGift();
+            navigate("/meus-presentes");
         } catch (error) {
-            console.log("Erro ao escolher presente", error);
-            alert("Erro ao escolher presente. Tente novamente.");
+            console.log("Erro ao remover presente", error);
+            alert("Erro ao remover presente. Tente novamente.");
         }
     };
 

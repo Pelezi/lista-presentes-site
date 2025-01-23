@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Gift, getGiftsById, addGiftToGuest } from "../../../services/giftService";
 import styles from "./DetalhesGiftGuest.module.css";
 import Button from "../../../components/common/Button";
@@ -9,6 +9,8 @@ import * as Yup from "yup";
 import Form from "../../../components/forms/Form";
 
 const DetalhesGift: React.FC = () => {
+    const navigate = useNavigate();
+    
     const { id } = useParams();
     const { guest } = useAuth();
     const [gift, setGift] = useState<Gift>({} as Gift);
@@ -47,6 +49,7 @@ const DetalhesGift: React.FC = () => {
             }
             alert("Presente escolhido com sucesso!");
             fetchGift();
+            navigate("/");
         } catch (error) {
             console.log("Erro ao escolher presente", error);
             alert("Erro ao escolher presente. Tente novamente.");
