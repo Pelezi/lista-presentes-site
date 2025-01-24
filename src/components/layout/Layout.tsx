@@ -9,6 +9,7 @@ import styles from "./Layout.module.css";
 import { useNavigate } from "react-router-dom";
 
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -25,6 +26,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <div className={styles.content}>
                     {children}
                     <Analytics/>
+                    <SpeedInsights/>
                 </div>
                 <div className={styles.menu}>
                     <Menu />
