@@ -111,15 +111,17 @@ const Bio = () => {
                     </main>
                 )}
             Site feito por Alessandro Cardoso
-            {socialMediaData.map((social, index) => (
-                <SocialMedia
-                    key={index}
-                    name={social.name}
-                    userName={social.userName}
-                    url={social.url}
-                    image={social.image}
-                />
-            ))}
+            <div className={styles.socialMediaContainer}>
+                {socialMediaData.map((social, index) => (
+                    <SocialMedia
+                        key={index}
+                        name={social.name}
+                        userName={social.userName}
+                        url={social.url}
+                        image={social.image}
+                    />
+                ))}
+            </div>
         </div>
     )
 };

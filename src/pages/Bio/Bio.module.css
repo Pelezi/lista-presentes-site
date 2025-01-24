@@ -49,3 +49,7 @@
 .rickrollGif {
     width: 90vw;
 }
+
+.socialMediaContainer {
+    justify-self: center;
+}
