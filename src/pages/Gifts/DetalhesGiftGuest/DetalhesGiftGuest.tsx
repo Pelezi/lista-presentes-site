@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Gift, getGiftsById, addGiftToGuest } from "../../../services/giftService";
+import { Gift, getGiftsById, addGiftToGuest, sendTelegramMessage } from "../../../services/giftService";
 import styles from "./DetalhesGiftGuest.module.css";
 import Button from "../../../components/common/Button";
 import Input from "../../../components/forms/Input";
@@ -10,7 +10,7 @@ import Form from "../../../components/forms/Form";
 
 const DetalhesGift: React.FC = () => {
     const navigate = useNavigate();
-    
+
     const { id } = useParams();
     const { guest } = useAuth();
     const [gift, setGift] = useState<Gift>({} as Gift);
@@ -44,12 +44,18 @@ const DetalhesGift: React.FC = () => {
 
     const handleReserveGift = async (values: { quantity: number }) => {
         try {
-            for (let i = 0; i < values.quantity; i++) {
-                await addGiftToGuest(gift.id, guest.id);
+            if (gift.name == "Playstation 5 pro noivo") {
+                alert("O noivo agradece a consideração, mas infelizmente este presente é só uma piada 😭.");
+                sendTelegramMessage("playstation", guest.name);
+                navigate("/");
+            } else {
+                for (let i = 0; i < values.quantity; i++) {
+                    await addGiftToGuest(gift.id, guest.id);
+                }
+                alert("Presente escolhido com sucesso!");
+                fetchGift();
+                navigate("/");
             }
-            alert("Presente escolhido com sucesso!");
-            fetchGift();
-            navigate("/");
         } catch (error) {
             console.log("Erro ao escolher presente", error);
             alert("Erro ao escolher presente. Tente novamente.");
