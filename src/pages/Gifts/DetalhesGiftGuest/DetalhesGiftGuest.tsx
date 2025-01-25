@@ -46,6 +46,7 @@ const DetalhesGift: React.FC = () => {
         try {
             if (gift.name == "Playstation 5 pro noivo") {
                 alert("O noivo agradece a consideração, mas infelizmente este presente é só uma piada 😭.");
+                alert("Mas se quiser dar mesmo assim o noivo aceita :)");
                 sendTelegramMessage("playstation", guest.name);
                 navigate("/");
             } else {
