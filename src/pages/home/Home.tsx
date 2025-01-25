@@ -45,7 +45,7 @@ const Home = () => {
                 sendTelegramMessage("bio", guest.name);
                 setTimeout(() => {
                     navigate("/bio");
-                }, 1000);
+                }, 400);
             } catch (error) {
                 console.log(error);
             }
