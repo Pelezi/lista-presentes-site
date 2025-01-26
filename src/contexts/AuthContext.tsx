@@ -42,6 +42,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setGuest({} as Guest);
         setAuthenticated(false);
         localStorage.removeItem("guest");
+        localStorage.removeItem("hasVisited");
     };
 
     return (
