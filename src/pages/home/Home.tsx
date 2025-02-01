@@ -37,7 +37,7 @@ const Home = () => {
     }
 
     const handleScroll = () => {
-        const isBottom = (window.innerHeight * 1.5) + window.scrollY >= document.documentElement.scrollHeight;
+        const isBottom = (window.innerHeight * 1) + window.scrollY >= document.documentElement.scrollHeight / 2;
         setIsScrolledToBottom(isBottom);
     };
 
